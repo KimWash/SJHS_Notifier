@@ -16,60 +16,65 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    fun getTime(type:String): String {
+    fun getTime(type:Int): Int {
         val now = System.currentTimeMillis()
         val date = Date(now)
-        val hourFormat = SimpleDateFormat("HH")
-        val timeFormat = SimpleDateFormat("HH시 mm분 ss초")
-        val dateFormat = SimpleDateFormat("YYYY년 MM월 DD일")
-        val hourNow = hourFormat.format(date)
-        val timeNow = timeFormat.format(date)
-        val dateNow = dateFormat.format(date)
-        
-        if (type == "date"){
-            return dateNow
+        if (type == 0){
+            val yearFormat = SimpleDateFormat("YYYY")
+            val yearNow = yearFormat.format(date)
+            return Integer.parseInt(yearNow)
         }
-        else if (type == "time"){
-            return timeNow
+        if (type == 1){
+            val monthFormat = SimpleDateFormat("MM")
+            val monthNow = monthFormat.format(date)
+            return Integer.parseInt(monthNow)
         }
-        return "시간을 불러오지 못했습니다."
-    }
-    fun getHour(): Int{
-        val now = System.currentTimeMillis()
-        val date = Date(now)
-        val hourFormat = SimpleDateFormat("HH")
-        val hourNow = hourFormat.format(date)
-        return Integer.parseInt(hourNow)
+        else if (type == 2){
+            val dateFormat = SimpleDateFormat("DD")
+            val dayNow = dateFormat.format(date)
+            return Integer.parseInt(dayNow)
+        }
+        else if (type == 3){
+            val hourFormat = SimpleDateFormat("HH")
+            val hourNow = hourFormat.format(date)
+            return Integer.parseInt(hourNow)
+        }
+        else if (type == 4){
+            val minFormat = SimpleDateFormat("mm")
+            val minnow = minFormat.format(date)
+            return Integer.parseInt(minnow)
+        }
+        return 808
     }
     fun dispWelcome(): Int{
         
-        if (getHour() in 7..11) {
+        if (getTime(3) in 7..11) {
             welcome.setText("좋은 아침이에요. \n아침은 먹었나요?")
         }
-        else if (getHour() in 12..13) {
+        else if (getTime(3) in 12..13) {
             welcome.setText("점심시간이에요. \n식사 맛있게하세요!")
         }
-        else if (getHour() in 14..19){
+        else if (getTime(3) in 14..19){
             welcome.setText("점심도 맛있게 먹었겠다 \n열심히 공부해봐요!")
         }
-        else if (getHour() == 20) {
+        else if (getTime(3) == 20) {
             welcome.setText("공부도 \n저녁먹고 든든하게!")
         }
-        else if (getHour() in 21..23){
+        else if (getTime(3) in 21..23){
             welcome.setText("내일까지 해야하는 과제, \n확인했나요?")
         }
-        else if (getHour() == 0){
+        else if (getTime(3) == 0){
             welcome.setText("빨리 안자면 \n내일 지각할거에요!!")
         }
-        else if (getHour() in 1..7) {
+        else if (getTime(3) in 1..7) {
             welcome.setText("헉.. 시험기간인가봐요! \n화이팅!")
         }
-        if (getTime("date") == "시간을 불러오지 못했습니다."){
+        if (getTime(3) == 808){ //에러코드
             welcome.setText("시간을 불러오지 못했습니다.")
         }
         return 0
     }
-    fun isNetworkAvailable() {
+    fun isNetworkAvailable(year:Int, month:Int, day:Int, hour:Int) {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         val status = networkInfo != null && networkInfo.isConnected
@@ -88,21 +93,34 @@ class MainActivity : AppCompatActivity() {
 
         }
         else {
-            getInformations()
+            getInformations(year, month, day, hour)
         }
 
 
     }
-    fun getInformations(){
+    fun getInformations(gotyear:Int, gotmonth:Int, day:Int, hour:Int){
         val thread = Thread(Runnable {
-            val school = School(School.Type.HIGH, School.Region.CHUNGBUK, "M100002171")
-            val schedule = school.getMonthlySchedule(2019, 12)
-// 2019년 1월 2일 점심 급식 식단표
-            val menu = school.getMonthlyMenu(2019, 12)
+            val school = School(School.Type.HIGH, School.Region.CHUNGBUK, "M100002171") //setSchool
+            val schedule = school.getMonthlySchedule(gotyear, gotmonth) //get Schedule
+            val menu = school.getMonthlyMenu(gotyear, gotmonth) // get Menu
             runOnUiThread {
-                // UI작업
-                meal.setText(menu[1].lunch)
-// 2018년 12월 5일 학사일정
+                // UI Update
+                if (hour in 1..7){
+                    mealName.setText("오늘의 아침")
+                    meal.setText(menu[day+1].breakfast)
+                }
+                else if (hour in 8..12) {
+                    mealName.setText("오늘의 점심")
+                    meal.setText(menu[day+1].lunch)
+                }
+                else if (hour in 13..18){
+                    mealName.setText("오늘의 저녁")
+                    meal.setText(menu[day+1].dinner)
+                }
+                else if (hour in 19..0){
+                    mealName.setText("내일의 아침")
+                    meal.setText(menu[day+2].lunch)
+                }
                 schedules.setText("")
                 for (i in schedule.indices) {
                     if (schedule[i].toString().equals("토요휴업일\n") || schedule[i].toString().equals("")){
@@ -117,7 +135,7 @@ class MainActivity : AppCompatActivity() {
         thread.start()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-        isNetworkAvailable()
+        isNetworkAvailable(getTime(0), getTime(1), getTime(2), getTime(3))
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         super.onCreate(savedInstanceState)

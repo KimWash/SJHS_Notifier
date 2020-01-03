@@ -20,7 +20,8 @@
         </activity>
 
         <activity
-            android:name=".mealActivity"/>
+            android:name=".mealActivity"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
