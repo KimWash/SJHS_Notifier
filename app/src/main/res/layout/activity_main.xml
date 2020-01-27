@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nbgb"
-                android:text="학사일정"
+                android:text="이달의 학사일정"
                 android:textColor="@color/colorBlack"
                 android:textSize="9pt" />
 
