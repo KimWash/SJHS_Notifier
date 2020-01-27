@@ -13,14 +13,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kr.go.neis.api.School
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import kr.go.neis.api.Menu
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 class MainActivity : AppCompatActivity() {
+
     fun getTime(type:Int): Int {
         val now = System.currentTimeMillis()
         val date = Date(now)
         if (type == 0){
-            val yearFormat = SimpleDateFormat("YYYY")
+            val yearFormat = SimpleDateFormat("yyyy")
             val yearNow = yearFormat.format(date)
             return Integer.parseInt(yearNow)
         }
@@ -74,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
         return 0
     }
+
     fun isNetworkAvailable(year:Int, month:Int, day:Int, hour:Int) {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
@@ -95,31 +108,40 @@ class MainActivity : AppCompatActivity() {
         else {
             getInformations(year, month, day, hour)
         }
-
-
     }
-    fun getInformations(gotyear:Int, gotmonth:Int, day:Int, hour:Int){
+
+    fun checkNullmenu(menu:String): Boolean{
+        if (menu == ""){
+            return true
+        }
+        return false
+    }
+
+    fun getInformations(gotyear:Int, gotmonth:Int, day:Int, hour:Int){//Todo: SSL 인증서 추가
+        print(gotyear.toString() + "년" + gotmonth + "월" + day + "일" + hour + "시")
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
         val thread = Thread(Runnable {
             val school = School(School.Type.HIGH, School.Region.CHUNGBUK, "M100002171") //setSchool
             val schedule = school.getMonthlySchedule(gotyear, gotmonth) //get Schedule
             val menu = school.getMonthlyMenu(gotyear, gotmonth) // get Menu
             runOnUiThread {
                 // UI Update
-                if (hour in 1..7){
+                if (hour in 0..7 && checkNullmenu(menu[day-1].breakfast) == false){
                     mealName.setText("오늘의 아침")
-                    meal.setText(menu[day+1].breakfast)
+                    meal.setText(menu[day-1].breakfast)
                 }
-                else if (hour in 8..12) {
+                else if (hour in 8..12 && checkNullmenu(menu[day-1].lunch) == false) {
                     mealName.setText("오늘의 점심")
-                    meal.setText(menu[day+1].lunch)
+                    meal.setText(menu[day-1].lunch)
                 }
-                else if (hour in 13..18){
+                else if (hour in 13..18 && checkNullmenu(menu[day-1].dinner) == false){
                     mealName.setText("오늘의 저녁")
-                    meal.setText(menu[day+1].dinner)
+                    meal.setText(menu[day-1].dinner)
                 }
-                else if (hour in 19..0){
+                else if (hour in 19..23 && checkNullmenu(menu[day].breakfast) == false){
                     mealName.setText("내일의 아침")
-                    meal.setText(menu[day+2].lunch)
+                    meal.setText(menu[day].breakfast)
                 }
                 schedules.setText("")
                 for (i in schedule.indices) {
@@ -136,8 +158,6 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         isNetworkAvailable(getTime(0), getTime(1), getTime(2), getTime(3))
-        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dispWelcome()
