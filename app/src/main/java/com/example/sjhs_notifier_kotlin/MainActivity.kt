@@ -110,8 +110,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun checkNullmenu(menu:String): Boolean{
-        if (menu == ""){
+    fun checkNull(text:String): Boolean{
+        if (text == ""){
             return true
         }
         return false
@@ -127,21 +127,24 @@ class MainActivity : AppCompatActivity() {
             val menu = school.getMonthlyMenu(gotyear, gotmonth) // get Menu
             runOnUiThread {
                 // UI Update
-                if (hour in 0..7 && checkNullmenu(menu[day-1].breakfast) == false){
+                if (hour in 0..7 && checkNull(menu[day-1].breakfast) == false){
                     mealName.setText("오늘의 아침")
                     meal.setText(menu[day-1].breakfast)
                 }
-                else if (hour in 8..12 && checkNullmenu(menu[day-1].lunch) == false) {
+                else if (hour in 8..12 && checkNull(menu[day-1].lunch) == false) {
                     mealName.setText("오늘의 점심")
                     meal.setText(menu[day-1].lunch)
                 }
-                else if (hour in 13..18 && checkNullmenu(menu[day-1].dinner) == false){
+                else if (hour in 13..18 && checkNull(menu[day-1].dinner) == false){
                     mealName.setText("오늘의 저녁")
                     meal.setText(menu[day-1].dinner)
                 }
-                else if (hour in 19..23 && checkNullmenu(menu[day].breakfast) == false){
+                else if (hour in 19..23 && checkNull(menu[day].breakfast) == false){
                     mealName.setText("내일의 아침")
                     meal.setText(menu[day].breakfast)
+                }
+                else {
+                    meal.setText("이런, 오늘은 급식이 없는 것 같군요. \uD83D\uDE22")
                 }
                 schedules.setText("")
                 for (i in schedule.indices) {
@@ -149,6 +152,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     else {
                         schedules.append("${i + 1}일 "+schedule[i].toString())
+                    }
+                    if (schedules.text == ""){
+                        schedules.setText("이번달은 학사일정이 없어요! ☺")
                     }
                 }
             }
