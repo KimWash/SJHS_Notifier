@@ -1,29 +1,20 @@
 package com.example.sjhs_notifier_kotlin
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.StrictMode
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.go.neis.api.School
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import kr.go.neis.api.Menu
-import java.security.cert.CertificateException
-import java.security.cert.X509Certificate
-import javax.net.ssl.HttpsURLConnection
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             return Integer.parseInt(monthNow)
         }
         else if (type == 2){
-            val dateFormat = SimpleDateFormat("DD")
+            val dateFormat = SimpleDateFormat("dd")
             val dayNow = dateFormat.format(date)
             return Integer.parseInt(dayNow)
         }
@@ -162,9 +153,38 @@ class MainActivity : AppCompatActivity() {
         })
         thread.start()
     }
+
+    fun isNightModeActive(context: Context): Boolean {
+        val defaultNightMode = AppCompatDelegate.getDefaultNightMode()
+        if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            return true
+        }
+        if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+            return false
+        }
+        val currentNightMode = (context.resources.configuration.uiMode
+                and Configuration.UI_MODE_NIGHT_MASK)
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> return false
+            Configuration.UI_MODE_NIGHT_YES -> return true
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> return false
+        }
+        return false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         isNetworkAvailable(getTime(0), getTime(1), getTime(2), getTime(3))
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+        if (isNightModeActive(this) == true){
+            print("\n\nnight mode")
+            setTheme(R.style.DarkTheme)
+        }
+        else if(isNightModeActive(this) == false){
+            print("\n\nday mode")
+            setTheme(R.style.LightTheme)
+        }
+
         setContentView(R.layout.activity_main)
         dispWelcome()
         var meallayout = findViewById(R.id.meallayout) as LinearLayout
@@ -172,5 +192,8 @@ class MainActivity : AppCompatActivity() {
             val mealIntent = Intent(this@MainActivity, mealActivity::class.java)
             startActivity(mealIntent)
         }
+
+
+
     }
 }

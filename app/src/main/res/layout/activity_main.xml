@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="?attr/bgColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,11 +25,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/nbgb"
+                android:fontFamily="@font/rbt_regular"
                 android:lineSpacingExtra="5pt"
                 android:text="안녕하세요!\n안녕하십니까."
-                android:textColor="@color/colorBlack"
-                android:textSize="11pt" />
+                android:textColor="?attr/titleColor"
+                android:textSize="40sp" />
 
 
         </LinearLayout>
@@ -51,33 +52,19 @@
                     android:id="@+id/mealName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nbgb"
+                    android:fontFamily="@font/rbt_meduim"
                     android:text="오늘의 식단"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="9pt" />
+                    android:textColor="?attr/titleColor"
+                    android:textSize="19sp" />
             </LinearLayout>
                 <TextView
                     android:id="@+id/meal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="식단 정보를 불러오는 중 입니다." />
-
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shadow"
-            android:orientation="vertical"
-            android:paddingBottom="18dp"
-            android:paddingTop="18dp"
-            android:paddingLeft="18dp"
-            tools:ignore="MissingConstraints"
-            android:clickable="true">
-
+                    android:text="식단 정보를 불러오는 중 입니다."
+                    android:textColor="?attr/textColor"
+                    android:textSize="16sp"/>
 
 
             <TextView
@@ -86,15 +73,17 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nbgb"
                 android:text="이달의 학사일정"
-                android:textColor="@color/colorBlack"
-                android:textSize="9pt" />
+                android:textColor="?attr/titleColor"
+                android:textSize="19sp" />
 
             <TextView
                 android:id="@+id/schedules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="학사일정을 불러오는 중 입니다." />
+                android:text="학사일정을 불러오는 중 입니다."
+                android:textColor="?attr/textColor"
+                android:textSize="16sp"/>
         </LinearLayout>
         </LinearLayout>
 

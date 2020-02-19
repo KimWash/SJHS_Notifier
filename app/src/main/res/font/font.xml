@@ -3,17 +3,13 @@
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/nbg"/>
+        android:font = "@font/rbt_meduim"/>
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/nbgul"/>
+        android:font = "@font/rbt_regular"/>
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/nbgl"/>
-    <font
-        android:fontStyle = "normal"
-        android:fontWeight = "400"
-        android:font = "@font/nbgb"/>
+        android:font = "@font/rbt_light"/>
 </font-family>
