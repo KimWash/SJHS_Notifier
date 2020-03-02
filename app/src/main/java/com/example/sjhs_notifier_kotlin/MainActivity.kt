@@ -5,7 +5,9 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.Handler
 import android.os.StrictMode
+import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -78,28 +80,6 @@ class MainActivity : AppCompatActivity() {
         return 0
     }
 
-    fun isNetworkAvailable(year:Int, month:Int, day:Int, hour:Int) {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        val status = networkInfo != null && networkInfo.isConnected
-        if (status == false) {
-            val alert_confirm =
-                AlertDialog.Builder(this)
-            alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
-                .setPositiveButton(
-                    "확인"
-                ) { dialog, which ->
-                    // 'YES'
-                    android.os.Process.killProcess(android.os.Process.myPid())
-                }
-            val alert = alert_confirm.create()
-            alert.show()
-
-        }
-        else {
-            getInformations(year, month, day, hour)
-        }
-    }
 
     fun checkNull(text:String): Boolean{
         if (text == ""){
@@ -138,8 +118,12 @@ class MainActivity : AppCompatActivity() {
                     meal.setText("이런, 오늘은 급식이 없는 것 같군요. \uD83D\uDE22")
                 }
                 schedules.setText("")
+                /**점심 테스트**/
+                mealName.setText("오늘의 점심")
+                meal.setText(menu[day-3].lunch)
+                /**점심테스트**/
                 for (i in schedule.indices) {
-                    if (schedule[i].toString().equals("토요휴업일\n") || schedule[i].toString().equals("")){
+                    if (schedule[i].toString().equals("토요휴업일\n") || schedule[i].toString().equals("") || schedule[i].toString().equals("휴업일\n")){
                     }
                     else {
                         schedules.append("${i + 1}일 "+schedule[i].toString())
@@ -153,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         })
         thread.start()
     }
-
+companion object {
     fun isNightModeActive(context: Context): Boolean {
         val defaultNightMode = AppCompatDelegate.getDefaultNightMode()
         if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -171,29 +155,27 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
+}
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        isNetworkAvailable(getTime(0), getTime(1), getTime(2), getTime(3))
+        getInformations(getTime(0), getTime(1), getTime(2), getTime(3))
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
         if (isNightModeActive(this) == true){
-            print("\n\nnight mode")
             setTheme(R.style.DarkTheme)
         }
         else if(isNightModeActive(this) == false){
-            print("\n\nday mode")
             setTheme(R.style.LightTheme)
         }
 
         setContentView(R.layout.activity_main)
         dispWelcome()
         var meallayout = findViewById(R.id.meallayout) as LinearLayout
-        meallayout.setOnClickListener{
-            val mealIntent = Intent(this@MainActivity, mealActivity::class.java)
-            startActivity(mealIntent)
-        }
+        meallayout.setOnClickListener{ it: View? -> val mealIntent = Intent(this@MainActivity, mealActivity::class.java); startActivity(mealIntent) }
 
-
+        var settingButton = findViewById<LinearLayout>(R.id.setting)
+        settingButton.setOnClickListener { View -> val settingIntent = Intent(this@MainActivity, settingActivity::class.java); startActivity(settingIntent) }
 
     }
 }
