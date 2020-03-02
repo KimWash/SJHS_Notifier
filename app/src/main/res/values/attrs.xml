@@ -4,4 +4,6 @@
     <attr name="textColor" format="color"/>
     <attr name="titleColor" format="color"/>
     <attr name="tileBG" format="color"/>
+    <attr name="selectedColor" format="color"/>
+    <attr name="unSelectedColor" format="color"/>
 </resources>
