@@ -6,4 +6,5 @@
     <attr name="tileBG" format="color"/>
     <attr name="selectedColor" format="color"/>
     <attr name="unSelectedColor" format="color"/>
+    <attr name="tablemargin" format="integer"/>
 </resources>

@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.StrictMode
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getInformations(gotyear:Int, gotmonth:Int, day:Int, hour:Int){//Todo: SSL 인증서 추가
-        print(gotyear.toString() + "년" + gotmonth + "월" + day + "일" + hour + "시")
+        Log.e("Debug", gotyear.toString() + "년" + gotmonth + "월" + day + "일" + hour + "시")
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         val thread = Thread(Runnable {
@@ -118,19 +119,18 @@ class MainActivity : AppCompatActivity() {
                     meal.setText("이런, 오늘은 급식이 없는 것 같군요. \uD83D\uDE22")
                 }
                 schedules.setText("")
-                /**점심 테스트**/
-                mealName.setText("오늘의 점심")
-                meal.setText(menu[day-3].lunch)
-                /**점심테스트**/
+
+
+
                 for (i in schedule.indices) {
                     if (schedule[i].toString().equals("토요휴업일\n") || schedule[i].toString().equals("") || schedule[i].toString().equals("휴업일\n")){
                     }
                     else {
                         schedules.append("${i + 1}일 "+schedule[i].toString())
                     }
-                    if (schedules.text == ""){
-                        schedules.setText("이번달은 학사일정이 없어요! ☺")
-                    }
+                }
+                if (schedules.text == ""){
+                    schedules.setText("이번달은 학사일정이 없어요! ☺")
                 }
             }
 
@@ -173,6 +173,9 @@ companion object {
         dispWelcome()
         var meallayout = findViewById(R.id.meallayout) as LinearLayout
         meallayout.setOnClickListener{ it: View? -> val mealIntent = Intent(this@MainActivity, mealActivity::class.java); startActivity(mealIntent) }
+
+        var timetable = findViewById(R.id.timetableButton) as LinearLayout
+        timetable.setOnClickListener{ it: View? -> val timeIntent = Intent(this@MainActivity, timeTableActivity::class.java); startActivity(timeIntent) }
 
         var settingButton = findViewById<LinearLayout>(R.id.setting)
         settingButton.setOnClickListener { View -> val settingIntent = Intent(this@MainActivity, settingActivity::class.java); startActivity(settingIntent) }

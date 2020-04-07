@@ -28,6 +28,10 @@
 
         </activity>
 
+        <activity android:name=".timeTableActivity" android:parentActivityName=".MainActivity">
+
+        </activity>
+
         <activity
             android:name=".settingActivity"
             android:parentActivityName=".MainActivity">

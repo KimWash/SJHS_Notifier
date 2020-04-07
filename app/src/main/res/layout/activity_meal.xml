@@ -92,7 +92,6 @@
             android:paddingBottom="15dp"
             android:theme="@style/bNav"
             app:elevation="0dp"
-            app:itemTextColor="@drawable/selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu">
 

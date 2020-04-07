@@ -28,7 +28,7 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/rbt_regular"
                 android:lineSpacingExtra="5pt"
-                android:text="안녕하세요!\n안녕하십니까."
+                android:text="환영메시지"
                 android:textColor="?attr/titleColor"
                 android:textSize="30sp" />
 
@@ -73,16 +73,18 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:background="?android:attr/listDivider" />
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="?android:attr/listDivider" />
 
             <LinearLayout
+                android:id="@+id/yearSchedule"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="7.5dp">
+                android:layout_marginTop="7.5dp"
+                android:layout_marginBottom="7.5dp">
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
@@ -98,6 +100,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="학사일정을 불러오는 중 입니다."
+                    android:textColor="?attr/textColor"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:id="@+id/timetableButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="7.5dp">
+                <TextView
+                    android:id="@+id/timetable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rbt_meduim"
+                    android:text="시간표"
+                    android:textColor="?attr/titleColor"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/timeTdescri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="나만의 시간표를 확인하세요."
                     android:textColor="?attr/textColor"
                     android:textSize="16sp" />
             </LinearLayout>

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SJHS_Notifier_Kotlin</string>
+    <string name="first">1교시\n08:40 ~ 09:30</string>
+    <string name="second">2교시\n09:40 ~ 10:30</string>
+    <string name="thrd">3교시\n10:40 ~ 11:30</string>
+    <string name="fourth">4교시\n11:40 ~ 12:30</string>
+    <string name="fiveth">5교시\n13:40 ~ 14:30</string>
+    <string name="sixth">6교시\n14:40 ~ 15:30</string>
+    <string name="seventh">7교시\n15:40 ~ 16:30</string>
+    <string name="hi">조회\n08:30 ~ 08:40</string>
+    <string name="lunch">점심시간\n12:30 ~ 13:40</string>
 </resources>

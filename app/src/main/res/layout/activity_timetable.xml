@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="0.1"
+        android:background="@android:color/transparent"
+        android:foregroundGravity="center_vertical"
+        android:theme="@style/ToolbarTheme"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5">
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/timeTable"
+                >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--android:background="@drawable/boarder_updown"-->
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:autoSizeTextType="uniform"
+                        android:text="시간"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:autoSizeTextType="uniform"
+                        android:text="월"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:autoSizeTextType="uniform"
+                        android:text="화"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:autoSizeTextType="uniform"
+                        android:text="수"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:autoSizeTextType="uniform"
+                        android:text="목"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:autoSizeTextType="uniform"
+                        android:text="금"
+                        />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/hi"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/first"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="윤리와사상\nB 박소라"
+                        android:autoSizeStepGranularity="500px"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="정치와 법\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="수학\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="독립운동사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/second"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/thrd"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/fourth"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lunch"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/fiveth"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/sixth"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/boarder_up">
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="@string/seventh"
+                        app:autoSizeTextType="uniform"/>
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="동아시아사\nB 박소라"
+                        app:autoSizeTextType="uniform"
+                        />
+
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</LinearLayout>
