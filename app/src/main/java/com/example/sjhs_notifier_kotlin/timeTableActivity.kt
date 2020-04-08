@@ -1,5 +1,6 @@
 package com.example.sjhs_notifier_kotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -34,7 +35,8 @@ class timeTableActivity : AppCompatActivity(){
         //return super.onOptionsItemSelected(item)
         when (item.itemId){
             R.id.edit_table -> {
-                Log.e("Debug", "시간표 수정진입")
+                val editIntent = Intent(this@timeTableActivity, editTableActivity::class.java)
+                startActivity(editIntent)
                 return true
             }
         }

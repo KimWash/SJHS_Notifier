@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="subject">
+        <item>노작</item>
+        <item>독립운동사</item>
+        <item>자율연구</item>
+        <item>문학</item>
+        <item>독서</item>
+        <item>수학I</item>
+        <item>수학II</item>
+        <item>확률과통계</item>
+        <item>영어I</item>
+        <item>영어II</item>
+        <item>영미문학</item>
+        <item>물리학I</item>
+        <item>화학I</item>
+        <item>생명과학I</item>
+        <item>지구과학I</item>
+        <item>동아시아사</item>
+        <item>경제</item>
+        <item>세계지리</item>
+        <item>정치와법</item>
+        <item>윤리와사상</item>
+        <item>스포츠</item>
+        <item>음악연주</item>
+        <item>미술창작</item>
+        <item>기술가정</item>
+        <item>정보</item>
+        <item>독일어</item>
+        <item>일본어</item>
+        <item>러시아어</item>
+        <item>프랑스어</item>
+        <item>스페인어</item>
+        <item>중국어</item>
+        <item>한문</item>
+        <item>심리학</item>
+        <item>논리학</item>
+        <item>논술</item>
+        <item>철학</item>
+    </string-array>
+    <string-array name="teacher">
+        <item>홍희순</item>
+        <item>김정훈</item>
+        <item>윤덕영</item>
+        <item>이도종</item>
+        <item>최혜정</item>
+        <item>박소라</item>
+        <item>박지혜</item>
+        <item>오영미</item>
+        <item>김용학</item>
+        <item>박미순</item>
+        <item>박서영</item>
+        <item>송민섭</item>
+    </string-array>
+    <string-array name="group">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="day">
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+    </string-array>
+    <string-array name="period">
+        <item>1교시</item>
+        <item>2교시</item>
+        <item>3교시</item>
+        <item>4교시</item>
+        <item>5교시</item>
+        <item>6교시</item>
+        <item>7교시</item>
+    </string-array>
+</resources>
