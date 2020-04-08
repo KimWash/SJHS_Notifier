@@ -6,7 +6,6 @@
         android:id="@+id/edit_table"
         android:title="시간표 수정"
         android:icon="@drawable/ic_edit"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 
 </menu>

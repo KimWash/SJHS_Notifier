@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="?attr/bgColor">
+    android:background="?attr/bgColor"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="412dp"
@@ -42,8 +41,8 @@
             android:clickable="false"
             android:orientation="vertical"
             android:paddingLeft="24dp"
-            android:paddingRight="24dp"
             android:paddingTop="18dp"
+            android:paddingRight="24dp"
             android:paddingBottom="18dp"
             tools:ignore="MissingConstraints">
 
@@ -51,8 +50,9 @@
                 android:id="@+id/meallayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginBottom="7.5dp">
+                android:layout_marginBottom="7.5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/mealName"
                     android:layout_width="wrap_content"
@@ -73,18 +73,19 @@
             </LinearLayout>
 
             <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:background="?android:attr/listDivider" />
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="?android:attr/listDivider" />
 
             <LinearLayout
                 android:id="@+id/yearSchedule"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_marginTop="7.5dp"
-                android:layout_marginBottom="7.5dp">
+                android:layout_marginBottom="7.5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
@@ -114,8 +115,9 @@
                 android:id="@+id/timetableButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="7.5dp">
+                android:layout_marginTop="7.5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/timetable"
                     android:layout_width="match_parent"
@@ -136,51 +138,50 @@
             </LinearLayout>
 
 
-
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shadow"
-        android:clickable="false"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp"
-        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:id="@+id/setting"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/settingTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/rbt_meduim"
-                android:text="설정"
-                android:textColor="?attr/titleColor"
-                android:textSize="19sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shadow"
+            android:clickable="false"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="18dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="18dp"
+            tools:ignore="MissingConstraints">
 
-            <TextView
-                android:id="@+id/settingContent"
+            <LinearLayout
+                android:id="@+id/setting"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="설정으로 이동합니다."
-                android:textColor="?attr/textColor"
-                android:textSize="16sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/settingTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rbt_meduim"
+                    android:text="설정"
+                    android:textColor="?attr/titleColor"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/settingContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="설정으로 이동합니다."
+                    android:textColor="?attr/textColor"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
-
-
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
