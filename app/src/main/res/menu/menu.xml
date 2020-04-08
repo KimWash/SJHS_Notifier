@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_one"
-        app:showAsAction="ifRoom"
         android:enabled="true"
-        android:title="조식" />
+        android:title="조식"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_two"
-        app:showAsAction="ifRoom"
         android:enabled="true"
-        android:title="중식" />
+        android:title="중식"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_three"
-        app:showAsAction="ifRoom"
         android:enabled="true"
-        android:title="석식" />
+        android:title="석식"
+        app:showAsAction="ifRoom" />
 </menu>
