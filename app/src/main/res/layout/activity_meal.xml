@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
 
     <!-- Todo: 캘린더 변경 -->
@@ -16,82 +16,85 @@
         android:layout_weight="0.1"
         android:background="@android:color/transparent"
         android:foregroundGravity="top"
-        android:theme="@style/ToolbarTheme" />
+        android:theme="@style/ToolbarTheme"
+        />
 
-    <ScrollView
-        android:id="@+id/scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5">
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <ScrollView
+            android:id="@+id/scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shadow"
-            android:orientation="vertical"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:paddingBottom="24dp">
+            android:layout_weight="5">
 
 
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/CalendarTheme" />
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="7.5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="식단"
-                    android:textColor="?attr/titleColor"
-                    android:textSize="19sp" />
-
-                <TextView
-                    android:id="@+id/lunch"
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text=""
-                    android:textColor="?attr/textColor"
-                    android:textSize="16sp" />
+                    android:background="@drawable/shadow"
+                    android:orientation="vertical"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingBottom="24dp">
+
+
+                    <CalendarView
+                        android:id="@+id/calendarView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/CalendarTheme" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="7.5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="식단"
+                            android:textColor="?attr/titleColor"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/lunch"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text=""
+                            android:textColor="?attr/textColor"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+
+        </ScrollView>
 
 
-    </ScrollView>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:background="?attr/bgColor"
-        android:foregroundGravity="bottom"
-        android:paddingBottom="15dp"
-        android:theme="@style/bNav"
-        app:elevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bMenu"
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:layout_height="wrap_content"
+            android:background="?attr/bgColor"
+            android:foregroundGravity="bottom"
+            android:paddingBottom="15dp"
+            android:theme="@style/bNav"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu">
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </LinearLayout>
