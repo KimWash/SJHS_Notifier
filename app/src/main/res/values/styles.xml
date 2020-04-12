@@ -29,6 +29,7 @@
 
     <style name="DarkTheme" parent="Theme.AppCompat">
         <item name="android:colorBackground">#080808</item>
+        <item name="colorPrimary">#080808</item>
         <item name="colorPrimaryDark">#080808</item>
         <item name="bgColor">#080808</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -49,6 +50,7 @@
         <item name="android:textColorPrimary">?attr/titleColor</item>
         <item name="android:textColorSecondary">?attr/titleColor</item>
         <item name="android:elevation">0dp</item>
+        <item name="background">?attr/bgColor</item>
     </style>
 
     <style name="CalendarTheme" parent="Theme.AppCompat">

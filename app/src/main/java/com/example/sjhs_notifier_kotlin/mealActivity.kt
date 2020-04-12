@@ -11,6 +11,7 @@ import android.widget.CalendarView
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_meal.*
@@ -155,6 +156,7 @@ class mealActivity : AppCompatActivity() {
                         }
                     }
                 }
+                bMenu.isVisible = true
                 when (bMenu.selectedItemId){
                     R.id.action_one -> lunch.setText(meals[0])
                     R.id.action_two -> lunch.setText(meals[1])
@@ -162,6 +164,7 @@ class mealActivity : AppCompatActivity() {
                 }
                 if (bMenu.getMenu().findItem(R.id.action_one).isVisible == false && bMenu.getMenu().findItem(R.id.action_two).isVisible == false && bMenu.getMenu().findItem(R.id.action_three).isVisible == false){
                     lunch.setText("이 날에는 급식 정보가 없는 것 같네요.")
+                    bMenu.isVisible = false
                 }
             }
         }).start()

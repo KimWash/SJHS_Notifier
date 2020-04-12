@@ -1,29 +1,35 @@
 package com.example.sjhs_notifier_kotlin
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.yoonlab.mathproject.Setting.PreferenceManager
 import kotlinx.android.synthetic.main.activity_edittable.*
 import kotlinx.android.synthetic.main.activity_meal.*
 import kotlinx.android.synthetic.main.activity_meal.toolbar
 import java.util.EnumSet.range
 
 class editTableActivity : AppCompatActivity()  {
-    var selectedSubject:Int? = null
-    var selectedTeacher:Int? = null
-    var selectedDay:Int? = null
-    var selectedsPeriod:Int? = null
-    var selectedePeriod:Int? = null
+    var selectedSubject:Int = 0
+    var selectedTeacher:Int = 0
+    var selectedDay:Int = 0
+    var selectedsPeriod:Int = 0
+    var selectedePeriod:Int = 0
     val editTableContext: Context = this
 
     fun uiStartUp(){
         setSupportActionBar(toolbar)
         getSupportActionBar()?.title = "수정"
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         teacherSpinner.setEnabled(false)
         teacherSpinner.setClickable(false)
         sPeriodSpinner.setEnabled(false)
@@ -37,7 +43,6 @@ class editTableActivity : AppCompatActivity()  {
         daySpinner.setSelection(0, false)
         sPeriodSpinner.setSelection(0, false)
         ePeriodSpinner.setSelection(0, false)
-
     }
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +55,7 @@ class editTableActivity : AppCompatActivity()  {
         }
         setContentView(R.layout.activity_edittable)
         uiStartUp()
+
 
 
 
@@ -120,10 +126,11 @@ class editTableActivity : AppCompatActivity()  {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
 
                 selectedsPeriod = position
-                for (x in 0..periodItems.size -1){
+                ePeriodItems = mutableListOf<String>()
+                for (x in 1..periodItems.size - 1){
                     Log.e("DEBUG", "$x 차시기, 선택:$selectedsPeriod periodItem: " + periodItems[x])
-                    if (periodItems[x].split("교".toRegex())[0].toInt()-1 >= selectedsPeriod!!){
-                        ePeriodItems.add((x+1).toString() + "교시")
+                    if (periodItems[x].split("교".toRegex())[0].toInt() >= selectedsPeriod!!){
+                        ePeriodItems.add((x).toString() + "교시")
                     }
                 }
                 Log.e("DEBUG", ePeriodItems.toString())
@@ -142,13 +149,69 @@ class editTableActivity : AppCompatActivity()  {
         ePeriodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
-                selectedePeriod = position
+                selectedePeriod = position + selectedsPeriod
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
 
             }
         }
-
-
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //return super.onCreateOptionsMenu(menu)
+        var menuInflater = getMenuInflater()
+        menuInflater.inflate(R.menu.editmenu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.ok -> {
+                if (selectedSubject == 0 || selectedTeacher == 0 || selectedDay == 0 || selectedsPeriod == 0 || selectedsPeriod == 0){
+                    Toast.makeText(this, "모든 값을 설정해주세요!", Toast.LENGTH_SHORT).show()
+                    return true
+                }
+                var schedule:MutableList<Int> = arrayListOf()
+                //같은 교시에 있는지 확인하기
+                val helper = DataBaseHelper(this)
+                val db = helper.writableDatabase
+                val cursor = db.rawQuery("select subject, teacher, day, sPeriod, ePeriod from tb_tt", null)
+                val cursor2 = db.rawQuery("select ePeriod from tb_tt where day = $selectedDay", null)
+
+                cursor.moveToFirst()
+                while (cursor.moveToNext()){
+                    Log.e("DEBUG", cursor.getString(3))
+                    var sPeriodOnDB = cursor.getString(3)
+                    var ePeriodOnDB = cursor.getString(4)
+                    var dayOnDB = cursor.getString(2)
+                    if (dayOnDB.toInt() == selectedDay){
+                        if (sPeriodOnDB.toInt() == selectedsPeriod){
+                            //만약 모든 ePeriod값중 selectedePeriod와 같은게 있으면 빠꾸
+                            cursor2.moveToFirst()
+                            while (cursor2.moveToNext()){
+                                var ePeriodOnDB = cursor2.getString(0)
+                                if (ePeriodOnDB.toInt() >= selectedePeriod){
+                                    Toast.makeText(this, "그 시간에는 이미 수업이 있습니다.", Toast.LENGTH_SHORT).show()
+                                    return true
+                                }
+                            }
+                            //선택값 적용 (요일, sPeriod 유지)
+                            db.execSQL("update tb_tt set subject = $selectedSubject, teacher = $selectedTeacher, ePeriod = $selectedePeriod")
+                            Toast.makeText(this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                            return true
+                        }
+                    }
+                }
+
+                db.execSQL("insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
+                Toast.makeText(this, "과목이 추가되었습니다!", Toast.LENGTH_SHORT).show()
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 }

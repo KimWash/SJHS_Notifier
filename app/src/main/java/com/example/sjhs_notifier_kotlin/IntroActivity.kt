@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.stetho.Stetho
 
 
 public class IntroActivity : AppCompatActivity()  {
@@ -18,7 +19,7 @@ public class IntroActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
-
+        Stetho.initializeWithDefaults(this)
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         val status = networkInfo != null && networkInfo.isConnected

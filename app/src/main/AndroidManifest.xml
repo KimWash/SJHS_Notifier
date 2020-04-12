@@ -31,6 +31,9 @@
         <activity android:name=".timeTableActivity" android:parentActivityName=".MainActivity">
 
         </activity>
+        <activity android:name=".editTableActivity" android:parentActivityName=".timeTableActivity">
+
+        </activity>
 
         <activity
             android:name=".settingActivity"

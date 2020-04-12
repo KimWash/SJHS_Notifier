@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="subject">
+        <item>과목을 선택해주세요.</item>
         <item>노작</item>
         <item>독립운동사</item>
         <item>자율연구</item>
@@ -37,8 +38,12 @@
         <item>논리학</item>
         <item>논술</item>
         <item>철학</item>
+        <item>HR</item>
+        <item>봉사</item>
+        <item>동아리</item>
     </string-array>
     <string-array name="teacher">
+        <item>선생님을 선택해주세요.</item>
         <item>홍희순</item>
         <item>김정훈</item>
         <item>윤덕영</item>
@@ -51,13 +56,22 @@
         <item>박미순</item>
         <item>박서영</item>
         <item>송민섭</item>
+        <item>김석호</item>
+        <item>윤종원</item>
+        <item>박미정</item>
+        <item>김지선</item>
+        <item>김슬빈</item>
+        <item>장영남</item>
+        <item>이영화</item>
     </string-array>
     <string-array name="group">
+        <item>그룹을 선택해주세요.</item>
         <item>A</item>
         <item>B</item>
         <item>C</item>
     </string-array>
     <string-array name="day">
+        <item>요일을 선택해주세요.</item>
         <item>월</item>
         <item>화</item>
         <item>수</item>
@@ -65,6 +79,7 @@
         <item>금</item>
     </string-array>
     <string-array name="period">
+        <item>교시</item>
         <item>1교시</item>
         <item>2교시</item>
         <item>3교시</item>
