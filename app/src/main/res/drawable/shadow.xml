@@ -3,6 +3,7 @@
     <!-- Background -->
     <item>
         <shape>
+            <stroke android:color="?attr/borderColor" android:width="0.5dp"/>
             <solid android:color="?attr/tileBG" />
             <corners android:radius="26dp" />
         </shape>
