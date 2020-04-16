@@ -27,7 +27,7 @@
             app:toolbarId="@+id/toolbar">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/settingToolbar"
                 android:theme="@style/ToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -67,25 +67,56 @@
                     tools:ignore="MissingConstraints">
 
                     <LinearLayout
-                        android:id="@+id/reseTButton"
+                    android:id="@+id/reseTButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                        android:layout_marginBottom="7.5dp">
+                    <TextView
+                        android:id="@+id/resetTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rbt_meduim"
+                        android:text="시간표 초기화"
+                        android:textColor="?attr/titleColor"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/resetTContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="시간표를 초기화합니다."
+                        android:textColor="?attr/textColor"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:id="@+id/reportButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginTop="7.5dp">
                         <TextView
-                            android:id="@+id/resetTitle"
+                            android:id="@+id/reportTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/rbt_meduim"
-                            android:text="시간표 초기화"
+                            android:text="오류/버그 신고하기"
                             android:textColor="?attr/titleColor"
                             android:textSize="19sp" />
 
                         <TextView
-                            android:id="@+id/resetTContent"
+                            android:id="@+id/reportContent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="시간표를 초기화합니다."
+                            android:text="오류/버그를 신고합니다."
                             android:textColor="?attr/textColor"
                             android:textSize="16sp" />
                     </LinearLayout>
