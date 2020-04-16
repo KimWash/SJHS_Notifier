@@ -3,23 +3,57 @@ package com.example.sjhs_notifier_kotlin
 import android.app.Activity;
 import android.content.Context
 import  android.content.Intent;
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.stetho.Stetho
+import kotlinx.android.synthetic.main.activity_intro.*
 
 
 public class IntroActivity : AppCompatActivity()  {
 
     private val SPLASH_TIME = 2000
 
+    fun isNightModeActive(context: Context): Boolean {
+        val defaultNightMode = AppCompatDelegate.getDefaultNightMode()
+        if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            return true
+        }
+        if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+            return false
+        }
+        val currentNightMode = (context.resources.configuration.uiMode
+                and Configuration.UI_MODE_NIGHT_MASK)
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> return false
+            Configuration.UI_MODE_NIGHT_YES -> return true
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> return false
+        }
+        return false
+    }
+
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (isNightModeActive(this)){
+            setTheme(R.style.DarkTheme)
+        }
+        else if(!isNightModeActive(this)){
+            setTheme(R.style.LightTheme)
+        }
         setContentView(R.layout.activity_intro)
         Stetho.initializeWithDefaults(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        if (isNightModeActive(this)){
+            imageView.setImageResource(R.drawable.splash_dark)
+        }
+        else if(!isNightModeActive(this)){
+            imageView.setImageResource(R.drawable.splash)
+        }
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         val status = networkInfo != null && networkInfo.isConnected
