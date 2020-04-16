@@ -69,7 +69,7 @@ class mealActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_meal)
         bMenu.itemIconTintList = null
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mealToolbar)
         getSupportActionBar()?.title = "식단표"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 

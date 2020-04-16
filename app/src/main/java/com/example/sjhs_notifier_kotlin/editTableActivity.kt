@@ -14,9 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yoonlab.mathproject.Setting.PreferenceManager
 import kotlinx.android.synthetic.main.activity_edittable.*
-import kotlinx.android.synthetic.main.activity_meal.*
-import kotlinx.android.synthetic.main.activity_meal.toolbar
-import java.util.EnumSet.range
+
 
 class editTableActivity : AppCompatActivity()  {
     var selectedSubject:Int = 0
@@ -59,7 +57,7 @@ class editTableActivity : AppCompatActivity()  {
 
 
 
-        var subjectItems = resources.getStringArray(R.array.subject)
+        val subjectItems = resources.getStringArray(R.array.subject)
         val myAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subjectItems)
         subjectSpinner.adapter = myAdapter
         subjectSpinner.setSelection(0, false)
@@ -76,8 +74,8 @@ class editTableActivity : AppCompatActivity()  {
         }
 
 
-        var teacherItems = resources.getStringArray(R.array.teacher)
-        var teacherItem:ArrayList<String> = ArrayList<String>()
+        val teacherItems = resources.getStringArray(R.array.teacher)
+        val teacherItem:ArrayList<String> = ArrayList<String>()
         when (selectedSubject){
             0 -> teacherItem.add(teacherItems[0])
             1 -> teacherItem.add(teacherItems[5])
@@ -99,7 +97,7 @@ class editTableActivity : AppCompatActivity()  {
         }
 
 
-        var dayItems = resources.getStringArray(R.array.day)
+        val dayItems = resources.getStringArray(R.array.day)
         val dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dayItems)
         daySpinner.adapter = dayAdapter
         daySpinner.setSelection(0, false)
@@ -116,7 +114,7 @@ class editTableActivity : AppCompatActivity()  {
         }
 
 
-        var periodItems = resources.getStringArray(R.array.period)
+        val periodItems = resources.getStringArray(R.array.period)
         var ePeriodItems = mutableListOf<String>()
         val periodAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, periodItems)
         sPeriodSpinner.adapter = periodAdapter
@@ -128,7 +126,6 @@ class editTableActivity : AppCompatActivity()  {
                 selectedsPeriod = position
                 ePeriodItems = mutableListOf<String>()
                 for (x in 1..periodItems.size - 1){
-                    Log.e("DEBUG", "$x 차시기, 선택:$selectedsPeriod periodItem: " + periodItems[x])
                     if (periodItems[x].split("교".toRegex())[0].toInt() >= selectedsPeriod!!){
                         ePeriodItems.add((x).toString() + "교시")
                     }
@@ -159,7 +156,7 @@ class editTableActivity : AppCompatActivity()  {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         //return super.onCreateOptionsMenu(menu)
-        var menuInflater = getMenuInflater()
+        val menuInflater = menuInflater
         menuInflater.inflate(R.menu.editmenu, menu)
         return true
     }
@@ -189,7 +186,7 @@ class editTableActivity : AppCompatActivity()  {
                             //만약 모든 ePeriod값중 selectedePeriod와 같은게 있으면 빠꾸
                             cursor2.moveToFirst()
                             while (cursor2.moveToNext()){
-                                var ePeriodOnDB = cursor2.getString(0)
+                                val ePeriodOnDB = cursor2.getString(0)
                                 if (ePeriodOnDB.toInt() >= selectedePeriod){
                                     Toast.makeText(this, "그 시간에는 이미 수업이 있습니다.", Toast.LENGTH_SHORT).show()
                                     return true
