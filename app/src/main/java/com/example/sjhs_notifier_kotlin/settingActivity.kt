@@ -1,13 +1,27 @@
 package com.example.sjhs_notifier_kotlin
 
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.content.Intent
+import android.content.pm.PackageInfo
+import android.os.Build
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_meal.*
-import kotlinx.android.synthetic.main.activity_meal.toolbar
 import kotlinx.android.synthetic.main.activity_setting.*
 
 public class settingActivity : AppCompatActivity()  {
+
+    fun getVersionInfo(context: Context) : String{
+        val info: PackageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+        val version = info.versionName
+        return version
+    }
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +32,7 @@ public class settingActivity : AppCompatActivity()  {
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(settingToolbar)
         getSupportActionBar()?.title = "설정"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
@@ -34,6 +48,25 @@ public class settingActivity : AppCompatActivity()  {
                 Toast.makeText(this, "시간표가 없는 것 같아요..", Toast.LENGTH_SHORT).show()
             }
 
+        }
+
+        var sendreport = findViewById<LinearLayout>(R.id.reportButton)
+        sendreport.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SEND)
+            emailIntent.setType("message/rfc822")
+            val emails:Array<String> = arrayOf("ckm0728wash@gmail.com")
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, emails)
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "서전고 알리미 오류 신고")
+            emailIntent.putExtra(
+                Intent.EXTRA_TEXT,
+                "어플리케이션 버전: " + getVersionInfo(this) +
+                        "\n기기 제조사: " + Build.BRAND +
+                        "\n기기 모델명: " + Build.MODEL +
+                        "\n소프트웨어 빌드번호: " + Build.VERSION.INCREMENTAL +
+                        "\n안드로이드 버전: " + Build.VERSION.RELEASE + " (API LEVEL: " + Build.VERSION.SDK_INT +
+                        "\n문의 내용: "
+            )
+            startActivity(emailIntent)
         }
     }
 }
