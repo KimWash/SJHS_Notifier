@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_edittable.*
 import kotlinx.android.synthetic.main.activity_meal.*
-import kotlinx.android.synthetic.main.activity_meal.toolbar
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.activity_timetable.*
 
@@ -25,7 +24,7 @@ class timeTableActivity : AppCompatActivity(){
             setTheme(R.style.LightTheme)
         }
         setContentView(R.layout.activity_timetable)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(timeTableToolbar)
         getSupportActionBar()?.title = "시간표"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
@@ -51,12 +50,15 @@ class timeTableActivity : AppCompatActivity(){
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadTable()
+    }
+
 
     fun loadTable(){
         var subjects = resources.getStringArray(R.array.subject)
         var teachers = resources.getStringArray(R.array.teacher)
-        var days = resources.getStringArray(R.array.day)
-        var periods = resources.getStringArray(R.array.period)
 
         var textArray:MutableList<TextView> = arrayListOf(subject0, subject1, subject2, subject3, subject4, subject5, subject6, subject7, subject8, subject9, subject10, subject11, subject12, subject13, subject14, subject15, subject16, subject17, subject18, subject19, subject20, subject21, subject22, subject23, subject24, subject25, subject26, subject27, subject28, subject29, subject30, subject31, subject32, subject33, subject34)
         val helper = DataBaseHelper(this)
