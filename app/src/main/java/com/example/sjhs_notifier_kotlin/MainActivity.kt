@@ -2,13 +2,11 @@ package com.example.sjhs_notifier_kotlin
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.os.Handler
 import android.os.StrictMode
 import android.util.Log
-import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         return 808
     }
     fun dispWelcome(): Int{
-        
+
         if (getTime(3) in 7..11) {
             welcome.setText("좋은 아침이에요. \n아침은 먹었나요?")
         }
@@ -81,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         return 0
     }
 
-
     fun checkNull(text:String): Boolean{
         if (text == ""){
             return true
@@ -100,19 +97,19 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 // UI Update
                 if (hour in 0..7 && checkNull(menu[day-1].breakfast) == false){
-                    mealName.setText("오늘의 아침")
+                    mealName.setText("\uD83C\uDF5C️ 오늘의 아침")
                     meal.setText(menu[day-1].breakfast)
                 }
                 else if (hour in 8..12 && checkNull(menu[day-1].lunch) == false) {
-                    mealName.setText("오늘의 점심")
+                    mealName.setText("\uD83C\uDF5C️ 오늘의 점심")
                     meal.setText(menu[day-1].lunch)
                 }
                 else if (hour in 13..18 && checkNull(menu[day-1].dinner) == false){
-                    mealName.setText("오늘의 저녁")
+                    mealName.setText("\uD83C\uDF5C️ 오늘의 저녁")
                     meal.setText(menu[day-1].dinner)
                 }
                 else if (hour in 19..23 && checkNull(menu[day].breakfast) == false){
-                    mealName.setText("내일의 아침")
+                    mealName.setText("\uD83C\uDF5C️ 내일의 아침")
                     meal.setText(menu[day].breakfast)
                 }
                 else {
@@ -137,48 +134,63 @@ class MainActivity : AppCompatActivity() {
         })
         thread.start()
     }
-companion object {
-    fun isNightModeActive(context: Context): Boolean {
-        val defaultNightMode = AppCompatDelegate.getDefaultNightMode()
-        if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-            return true
-        }
-        if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+    companion object {
+        fun isNightModeActive(context: Context): Boolean {
+            val defaultNightMode = AppCompatDelegate.getDefaultNightMode()
+            if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                return true
+            }
+            if (defaultNightMode == AppCompatDelegate.MODE_NIGHT_NO) {
+                return false
+            }
+            val currentNightMode = (context.resources.configuration.uiMode
+                    and Configuration.UI_MODE_NIGHT_MASK)
+            when (currentNightMode) {
+                Configuration.UI_MODE_NIGHT_NO -> return false
+                Configuration.UI_MODE_NIGHT_YES -> return true
+                Configuration.UI_MODE_NIGHT_UNDEFINED -> return false
+            }
             return false
         }
-        val currentNightMode = (context.resources.configuration.uiMode
-                and Configuration.UI_MODE_NIGHT_MASK)
-        when (currentNightMode) {
-            Configuration.UI_MODE_NIGHT_NO -> return false
-            Configuration.UI_MODE_NIGHT_YES -> return true
-            Configuration.UI_MODE_NIGHT_UNDEFINED -> return false
-        }
-        return false
     }
-}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getInformations(getTime(0), getTime(1), getTime(2), getTime(3))
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
-        if (isNightModeActive(this) == true){
+        if (isNightModeActive(this)){
             setTheme(R.style.DarkTheme)
         }
-        else if(isNightModeActive(this) == false){
+        else if(!isNightModeActive(this)){
             setTheme(R.style.LightTheme)
         }
-
         setContentView(R.layout.activity_main)
         dispWelcome()
-        var meallayout = findViewById(R.id.meallayout) as LinearLayout
-        meallayout.setOnClickListener{ it: View? -> val mealIntent = Intent(this@MainActivity, mealActivity::class.java); startActivity(mealIntent) }
 
-        var timetable = findViewById(R.id.timetableButton) as LinearLayout
-        timetable.setOnClickListener{ it: View? -> val timeIntent = Intent(this@MainActivity, timeTableActivity::class.java); startActivity(timeIntent) }
+        var prefs: SharedPreferences = getSharedPreferences("Pref", MODE_PRIVATE)
+        var isFirstRun = prefs.getBoolean("isFirstRun", true)
+        if (isFirstRun){
+            var alert_confirm = AlertDialog.Builder(this)
+            alert_confirm.setMessage("본 버전은 클로즈베타 버전입니다.\n 오류나 개선점을 발견하시면 설정 -> 오류 신고하는 곳에서 신고 부탁드립니다.\n관심가져주셔서 감사합니다.")
+            alert_confirm.setPositiveButton("확인", null)
+            alert_confirm
+                .setTitle("안내")
+                .create()
+                .setIcon(R.drawable.ic_build_black_24dp)
+            alert_confirm.show()
+            prefs.edit().putBoolean("isFirstRun", false).apply()
+        }
+
+        var meallayout = findViewById<LinearLayout>(R.id.meallayout)
+        meallayout.setOnClickListener{ val mealIntent = Intent(this@MainActivity, mealActivity::class.java); startActivity(mealIntent) }
+
+        var timetable = findViewById<LinearLayout>(R.id.timetableButton)
+        timetable.setOnClickListener{ val timeIntent = Intent(this@MainActivity, timeTableActivity::class.java); startActivity(timeIntent) }
 
         var settingButton = findViewById<LinearLayout>(R.id.setting)
-        settingButton.setOnClickListener { View -> val settingIntent = Intent(this@MainActivity, settingActivity::class.java); startActivity(settingIntent) }
+        settingButton.setOnClickListener { val settingIntent = Intent(this@MainActivity, settingActivity::class.java); startActivity(settingIntent) }
+
 
     }
 }
