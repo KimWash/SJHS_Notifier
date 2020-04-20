@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.yoonlab.mathproject.Setting.PreferenceManager
 import kotlinx.android.synthetic.main.activity_edittable.*
 
 
@@ -26,20 +25,18 @@ class editTableActivity : AppCompatActivity()  {
 
     fun uiStartUp(){
         setSupportActionBar(toolbar)
-        getSupportActionBar()?.title = "수정"
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        teacherSpinner.setEnabled(false)
-        teacherSpinner.setClickable(false)
-        sPeriodSpinner.setEnabled(false)
-        sPeriodSpinner.setClickable(false)
-        ePeriodSpinner.setEnabled(false)
-        ePeriodSpinner.setClickable(false)
-        daySpinner.setEnabled(false)
-        daySpinner.setClickable(false)
+        supportActionBar?.title = "수정"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        teacherSpinner.isEnabled = false
+        teacherSpinner.isClickable = false
+        sPeriodSpinner.isEnabled = false
+        sPeriodSpinner.isClickable = false
+        ePeriodSpinner.isEnabled = false
+        ePeriodSpinner.isClickable = false
+        daySpinner.isEnabled = false
+        daySpinner.isClickable = false
         subjectSpinner.setSelection(0, false)
         teacherSpinner.setSelection(0, false)
-        daySpinner.setSelection(0, false)
-        sPeriodSpinner.setSelection(0, false)
         ePeriodSpinner.setSelection(0, false)
     }
     @Override
@@ -54,8 +51,26 @@ class editTableActivity : AppCompatActivity()  {
         setContentView(R.layout.activity_edittable)
         uiStartUp()
 
-
-
+        val editIntent = intent
+        val activityFrom = editIntent.getIntExtra("from", 2)
+        val gotperiod = editIntent.getIntExtra("period", 35)
+        var day:Int? = null
+        var period:Int? = null
+        when (activityFrom){
+            0 -> {
+                daySpinner.setSelection(0, false)
+                sPeriodSpinner.setSelection(0, false)}
+            1 -> {
+                if (gotperiod == 35){
+                    Toast.makeText(this, "오류가 발생한 것 같습니다. 에러코드: 35", Toast.LENGTH_SHORT)
+                }
+                else{
+                    day = gotperiod / 7
+                    period = gotperiod % 7
+                }
+            }
+            2 -> {}
+        }
 
         val subjectItems = resources.getStringArray(R.array.subject)
         val myAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subjectItems)
@@ -64,8 +79,8 @@ class editTableActivity : AppCompatActivity()  {
         subjectSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
-                teacherSpinner.setEnabled(true)
-                teacherSpinner.setClickable(true)
+                teacherSpinner.isEnabled = true
+                teacherSpinner.isClickable = true
                 selectedSubject = position
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -87,8 +102,8 @@ class editTableActivity : AppCompatActivity()  {
         teacherSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
-                daySpinner.setEnabled(true)
-                daySpinner.setClickable(true)
+                daySpinner.isEnabled = true
+                daySpinner.isClickable = true
                 selectedTeacher = position
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -101,11 +116,14 @@ class editTableActivity : AppCompatActivity()  {
         val dayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dayItems)
         daySpinner.adapter = dayAdapter
         daySpinner.setSelection(0, false)
+        if (activityFrom == 1){
+            daySpinner.setSelection(day!! + 1, false)
+        }
         daySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
-                sPeriodSpinner.setEnabled(true)
-                sPeriodSpinner.setClickable(true)
+                sPeriodSpinner.isEnabled = true
+                sPeriodSpinner.isClickable = true
                 selectedDay = position
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -119,6 +137,9 @@ class editTableActivity : AppCompatActivity()  {
         val periodAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, periodItems)
         sPeriodSpinner.adapter = periodAdapter
         sPeriodSpinner.setSelection(0, false)
+        if (activityFrom == 1){
+            sPeriodSpinner.setSelection(period!! + 1, false)
+        }
         sPeriodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
@@ -126,15 +147,15 @@ class editTableActivity : AppCompatActivity()  {
                 selectedsPeriod = position
                 ePeriodItems = mutableListOf<String>()
                 for (x in 1..periodItems.size - 1){
-                    if (periodItems[x].split("교".toRegex())[0].toInt() >= selectedsPeriod!!){
+                    if (periodItems[x].split("교".toRegex())[0].toInt() >= selectedsPeriod){
                         ePeriodItems.add((x).toString() + "교시")
                     }
                 }
                 Log.e("DEBUG", ePeriodItems.toString())
                 val ePeriodAdapter = ArrayAdapter(editTableContext, android.R.layout.simple_spinner_dropdown_item, ePeriodItems)
                 ePeriodSpinner.adapter = ePeriodAdapter
-                ePeriodSpinner.setEnabled(true)
-                ePeriodSpinner.setClickable(true)
+                ePeriodSpinner.isEnabled = true
+                ePeriodSpinner.isClickable = true
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
 

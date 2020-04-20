@@ -27,8 +27,20 @@ class timeTableActivity : AppCompatActivity(){
         setSupportActionBar(timeTableToolbar)
         getSupportActionBar()?.title = "시간표"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-
+        var textArray:MutableList<TextView> = arrayListOf(subject0, subject1, subject2, subject3, subject4, subject5, subject6, subject7, subject8, subject9, subject10, subject11, subject12, subject13, subject14, subject15, subject16, subject17, subject18, subject19, subject20, subject21, subject22, subject23, subject24, subject25, subject26, subject27, subject28, subject29, subject30, subject31, subject32, subject33, subject34)
+        for (x in 0..34){
+            textArray[x].setOnClickListener {
+                setTable(x)
+            }
+        }
         loadTable()
+    }
+
+    fun setTable(period:Int){
+        val editIntent = Intent(this, editTableActivity::class.java)
+        editIntent.putExtra("period", period)
+        editIntent.putExtra("from", 1)
+        startActivity(editIntent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,6 +55,7 @@ class timeTableActivity : AppCompatActivity(){
         when (item.itemId){
             R.id.edit_table -> {
                 val editIntent = Intent(this@timeTableActivity, editTableActivity::class.java)
+                editIntent.putExtra("from", 0)
                 startActivity(editIntent)
                 return true
             }
@@ -59,7 +72,6 @@ class timeTableActivity : AppCompatActivity(){
     fun loadTable(){
         var subjects = resources.getStringArray(R.array.subject)
         var teachers = resources.getStringArray(R.array.teacher)
-
         var textArray:MutableList<TextView> = arrayListOf(subject0, subject1, subject2, subject3, subject4, subject5, subject6, subject7, subject8, subject9, subject10, subject11, subject12, subject13, subject14, subject15, subject16, subject17, subject18, subject19, subject20, subject21, subject22, subject23, subject24, subject25, subject26, subject27, subject28, subject29, subject30, subject31, subject32, subject33, subject34)
         val helper = DataBaseHelper(this)
         val db = helper.writableDatabase
