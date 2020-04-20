@@ -1,4 +1,4 @@
-package com.yoonlab.mathproject.Setting
+package com.example.sjhs_notifier_kotlin
 
 import android.content.Context
 import android.content.SharedPreferences

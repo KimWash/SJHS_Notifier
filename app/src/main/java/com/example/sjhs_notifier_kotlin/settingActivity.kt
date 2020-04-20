@@ -1,5 +1,6 @@
 package com.example.sjhs_notifier_kotlin
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,14 +8,18 @@ import android.os.Bundle
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.os.Build
+import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_meal.*
 import kotlinx.android.synthetic.main.activity_setting.*
 
+val TAG = "DEBUG"
 public class settingActivity : AppCompatActivity()  {
 
     fun getVersionInfo(context: Context) : String{
@@ -25,9 +30,9 @@ public class settingActivity : AppCompatActivity()  {
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (MainActivity.isNightModeActive(this) == true) {
+        if (MainActivity.isNightModeActive(this)) {
             setTheme(R.style.DarkTheme)
-        } else if (MainActivity.isNightModeActive(this) == false) {
+        } else if (!MainActivity.isNightModeActive(this)) {
             setTheme(R.style.LightTheme)
         }
         super.onCreate(savedInstanceState)
@@ -35,6 +40,16 @@ public class settingActivity : AppCompatActivity()  {
         setSupportActionBar(settingToolbar)
         getSupportActionBar()?.title = "설정"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+
+
+        backupButton.setOnClickListener {
+            if(!permissionManager.hasPermissions(this, permissionList)){
+                ActivityCompat.requestPermissions(this, permissionList, permissionALL)
+            }
+            else{
+                backupDB.exportDB(this)
+            }
+        }
 
         reseTButton.setOnClickListener{
             val helper = DataBaseHelper(this)
@@ -67,6 +82,8 @@ public class settingActivity : AppCompatActivity()  {
                         "\n문의 내용: "
             )
             startActivity(emailIntent)
+
         }
     }
+    
 }
