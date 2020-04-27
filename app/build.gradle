@@ -11,8 +11,8 @@ android {
         applicationId "com.example.sjhs_notifier_kotlin"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,6 +61,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.android.support:support-annotations:29'
     implementation 'com.android.support:design:29.0.0'
+    implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.github.nkzawa:socket.io-client:0.3.0'
     implementation('io.socket:socket.io-client:1.0.0') {
         exclude group: 'org.json', module: 'json'

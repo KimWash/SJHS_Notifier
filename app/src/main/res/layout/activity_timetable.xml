@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/bgColor">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/timeTableToolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_weight="0.1"
@@ -110,43 +111,48 @@
                         android:text="@string/first"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject0"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
                     <TextView
+                        android:id="@+id/subject7"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="윤리와사상\nB 박소라"
+                        android:text=""
                         android:autoSizeStepGranularity="500px"
                         app:autoSizeTextType="uniform"
                         />
 
                     <TextView
+                        android:id="@+id/subject14"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="정치와 법\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
                     <TextView
+                        android:id="@+id/subject21"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="수학\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
                     <TextView
+                        android:id="@+id/subject28"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="독립운동사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
@@ -163,39 +169,44 @@
                         android:text="@string/second"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject1"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
 
                         />
                     <TextView
+                        android:id="@+id/subject8"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject15"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject22"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject29"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
@@ -213,39 +224,44 @@
                         android:text="@string/thrd"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject2"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
 
                         />
                     <TextView
+                        android:id="@+id/subject9"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject16"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject23"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject30"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
@@ -261,39 +277,44 @@
                         android:text="@string/fourth"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject3"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
 
                         />
                     <TextView
+                        android:id="@+id/subject10"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject17"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject24"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject31"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
@@ -321,39 +342,44 @@
                         android:text="@string/fiveth"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject4"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
 
                         />
                     <TextView
+                        android:id="@+id/subject11"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject18"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject25"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject32"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
@@ -369,39 +395,44 @@
                         android:text="@string/sixth"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject5"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
 
                         />
                     <TextView
+                        android:id="@+id/subject12"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject19"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject26"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject33"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 
@@ -417,39 +448,44 @@
                         android:text="@string/seventh"
                         app:autoSizeTextType="uniform"/>
                     <TextView
+                        android:id="@+id/subject6"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
 
                         />
                     <TextView
+                        android:id="@+id/subject13"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject20"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject27"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
                     <TextView
+                        android:id="@+id/subject34"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
-                        android:text="동아시아사\nB 박소라"
+                        android:text=""
                         app:autoSizeTextType="uniform"
                         />
 

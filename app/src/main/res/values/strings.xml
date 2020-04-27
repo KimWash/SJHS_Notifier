@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SJHS_Notifier_Kotlin</string>
+    <string name="app_name">서전고 알리미</string>
     <string name="first">1교시\n08:40 ~ 09:30</string>
     <string name="second">2교시\n09:40 ~ 10:30</string>
     <string name="thrd">3교시\n10:40 ~ 11:30</string>

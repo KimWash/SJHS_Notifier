@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="subject">
+        <item>과목을 선택해주세요.</item>
+        <item>노작</item>
+        <item>독립운동사</item>
+        <item>자율연구</item>
+        <item>문학</item>
+        <item>독서</item>
+        <item>수학I</item>
+        <item>수학II</item>
+        <item>확률과통계</item>
+        <item>영어I</item>
+        <item>영어II</item>
+        <item>영미문학</item>
+        <item>물리학I</item>
+        <item>화학I</item>
+        <item>생명과학I</item>
+        <item>지구과학I</item>
+        <item>동아시아사</item>
+        <item>경제</item>
+        <item>세계지리</item>
+        <item>정치와법</item>
+        <item>윤리와사상</item>
+        <item>스포츠</item>
+        <item>음악연주</item>
+        <item>미술창작</item>
+        <item>기술가정</item>
+        <item>정보</item>
+        <item>독일어</item>
+        <item>일본어</item>
+        <item>러시아어</item>
+        <item>프랑스어</item>
+        <item>스페인어</item>
+        <item>중국어</item>
+        <item>한문</item>
+        <item>심리학</item>
+        <item>논리학</item>
+        <item>논술</item>
+        <item>철학</item>
+        <item>HR</item>
+        <item>봉사</item>
+        <item>동아리</item>
+    </string-array>
+    <string-array name="teacher">
+        <item>선생님을 선택해주세요.</item>
+        <item>권현주</item>
+        <item>김관림</item>
+        <item>김근영</item>
+        <item>김민주</item>
+        <item>김석호</item>
+        <item>김슬빈</item>
+        <item>김용학</item>
+        <item>김윤미</item>
+        <item>김정순</item>
+        <item>김정훈</item>
+        <item>김지선</item>
+        <item>박미순</item>
+        <item>박미정</item>
+        <item>박서영</item>
+        <item>박소라</item>
+        <item>박지혜</item>
+        <item>송민섭</item>
+        <item>양상희</item>
+        <item>오영미</item>
+        <item>윤덕영</item>
+        <item>윤예현</item>
+        <item>윤종원</item>
+        <item>이도종</item>
+        <item>이성철</item>
+        <item>이영화</item>
+        <item>이유숙</item>
+        <item>이은하수</item>
+        <item>이진</item>
+        <item>장소연</item>
+        <item>장영남</item>
+        <item>최원희</item>
+        <item>최혜정</item>
+        <item>한상훈</item>
+        <item>홍희순</item>
+        <item>황영연</item>
+    </string-array>
+    <string-array name="group">
+        <item>그룹을 선택해주세요.</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="day">
+        <item>요일을 선택해주세요.</item>
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+    </string-array>
+    <string-array name="period">
+        <item>교시</item>
+        <item>1교시</item>
+        <item>2교시</item>
+        <item>3교시</item>
+        <item>4교시</item>
+        <item>5교시</item>
+        <item>6교시</item>
+        <item>7교시</item>
+    </string-array>
+</resources>
