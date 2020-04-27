@@ -2,6 +2,7 @@ package com.example.sjhs_notifier_kotlin
 
 import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -22,6 +23,10 @@ class editTableActivity : AppCompatActivity()  {
     var selectedsPeriod:Int = 0
     var selectedePeriod:Int = 0
     val editTableContext: Context = this
+    private var helper:DataBaseHelper? = null
+    private var db: SQLiteDatabase? = null
+    var day:Int? = null
+    var period:Int? = null
 
     fun uiStartUp(){
         setSupportActionBar(toolbar)
@@ -39,6 +44,27 @@ class editTableActivity : AppCompatActivity()  {
         teacherSpinner.setSelection(0, false)
         ePeriodSpinner.setSelection(0, false)
     }
+
+    fun getSubject(day:Int, period:Int): MutableList<Int>{
+        val db = helper!!.readableDatabase
+        val cursor = db!!.rawQuery("select ePeriod from tb_tt where day = $day and sPeriod = $period", null)
+        var ePeriod:Int? = null
+        val ranges:MutableList<Int>? = null
+        while (cursor.moveToNext()){
+            ePeriod = cursor.getInt(0)
+            Log.e(TAG, "---------------범위불러오기----------------\n$day , $period , $ePeriod")
+            if (period < ePeriod){
+                for (x in period..ePeriod!!){
+                    Log.e(TAG, "$x")
+                    ranges!!.add(x)
+                }
+                Log.e(TAG, ranges.toString())
+                return ranges!!
+            }
+        }
+        return arrayListOf(0)
+    }
+
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +76,11 @@ class editTableActivity : AppCompatActivity()  {
         }
         setContentView(R.layout.activity_edittable)
         uiStartUp()
-
+        helper = DataBaseHelper(this)
+        db = helper!!.writableDatabase
         val editIntent = intent
         val activityFrom = editIntent.getIntExtra("from", 2)
         val gotperiod = editIntent.getIntExtra("period", 35)
-        var day:Int? = null
-        var period:Int? = null
         when (activityFrom){
             0 -> {
                 daySpinner.setSelection(0, false)
@@ -66,11 +91,19 @@ class editTableActivity : AppCompatActivity()  {
                 }
                 else{
                     day = gotperiod / 7
+                    selectedDay = day!! + 1
                     period = gotperiod % 7
+                    selectedsPeriod = period!! + 1
+                    val range = getSubject(day!!+1, period!!+1)
+                    selectedePeriod = range[range.size-1]
+
+                    Log.e(TAG, "$day+$period+$selectedePeriod")
                 }
             }
             2 -> {}
         }
+
+
 
         val subjectItems = resources.getStringArray(R.array.subject)
         val myAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subjectItems)
@@ -139,6 +172,22 @@ class editTableActivity : AppCompatActivity()  {
         sPeriodSpinner.setSelection(0, false)
         if (activityFrom == 1){
             sPeriodSpinner.setSelection(period!! + 1, false)
+            sPeriodSpinner.isEnabled = true
+            sPeriodSpinner.isClickable = true
+            ePeriodSpinner.isEnabled = true
+            ePeriodSpinner.isClickable = true
+            daySpinner.isEnabled = true
+            daySpinner.isClickable = true
+            val ePeriodItems = mutableListOf<String>()
+            for (x in 1..periodItems.size - 1){
+                if (periodItems[x].split("교".toRegex())[0].toInt() >= period!! + 1){
+                    ePeriodItems.add((x).toString() + "교시")
+                }
+            }
+
+            val ePeriodAdapter = ArrayAdapter(editTableContext, android.R.layout.simple_spinner_dropdown_item, ePeriodItems)
+            ePeriodSpinner.adapter = ePeriodAdapter
+
         }
         sPeriodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -164,6 +213,9 @@ class editTableActivity : AppCompatActivity()  {
 
 
         ePeriodSpinner.setSelection(0, false)
+        if (activityFrom == 1){
+            ePeriodSpinner.setSelection(selectedePeriod, false)
+        }
         ePeriodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 //아이템이 클릭 되면 맨 위부터 position 0번부터 순서대로 동작하게 됩니다.
@@ -191,38 +243,37 @@ class editTableActivity : AppCompatActivity()  {
                 }
                 var schedule:MutableList<Int> = arrayListOf()
                 //같은 교시에 있는지 확인하기
-                val helper = DataBaseHelper(this)
-                val db = helper.writableDatabase
-                val cursor = db.rawQuery("select subject, teacher, day, sPeriod, ePeriod from tb_tt", null)
-                val cursor2 = db.rawQuery("select ePeriod from tb_tt where day = $selectedDay", null)
-
-                cursor.moveToFirst()
+                val cursor = db!!.rawQuery("select subject, teacher, day, sPeriod, ePeriod from tb_tt", null)
+                val cursor2 = db!!.rawQuery("select ePeriod from tb_tt where day = $selectedDay", null)
+                Log.e(TAG, cursor.count.toString())
                 while (cursor.moveToNext()){
-                    Log.e("DEBUG", cursor.getString(3))
-                    var sPeriodOnDB = cursor.getString(3)
-                    var ePeriodOnDB = cursor.getString(4)
-                    var dayOnDB = cursor.getString(2)
-                    if (dayOnDB.toInt() == selectedDay){
-                        if (sPeriodOnDB.toInt() == selectedsPeriod){
-                            //만약 모든 ePeriod값중 selectedePeriod와 같은게 있으면 빠꾸
-                            cursor2.moveToFirst()
-                            while (cursor2.moveToNext()){
-                                val ePeriodOnDB = cursor2.getString(0)
-                                if (ePeriodOnDB.toInt() >= selectedePeriod){
-                                    Toast.makeText(this, "그 시간에는 이미 수업이 있습니다.", Toast.LENGTH_SHORT).show()
-                                    return true
-                                }
-                            }
-                            //선택값 적용 (요일, sPeriod 유지)
-                            db.execSQL("update tb_tt set subject = $selectedSubject, teacher = $selectedTeacher, ePeriod = $selectedePeriod")
-                            Toast.makeText(this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                            finish()
-                            return true
-                        }
+                    Log.e(TAG, "와일문 진입")
+                    Log.e("DEBUG", "sPeriod" + cursor.getString(3))
+                    var sPeriodOnDB = cursor.getInt(3)
+                    var ePeriodOnDB = cursor.getInt(4)
+                    var dayOnDB = cursor.getInt(2)
+                    Log.e(TAG, "DB상 시작 $sPeriodOnDB , 선택된 시작 $selectedsPeriod , DB상 끝 $ePeriodOnDB , 선택된 끝$selectedePeriod")
+
+                    if(selectedsPeriod in sPeriodOnDB..ePeriodOnDB && selectedePeriod > ePeriodOnDB){
+                        Toast.makeText(this, "그 시간에는 이미 수업이 있습니다!", Toast.LENGTH_SHORT).show()
+                        finish()
+                        return true
+                    }
+                    else if (sPeriodOnDB <= selectedsPeriod && sPeriodOnDB in sPeriodOnDB..ePeriodOnDB){
+                        db!!.execSQL("update tb_tt set subject = $selectedSubject, teacher = $selectedTeacher, sPeriod = $selectedsPeriod, ePeriod = $selectedePeriod where day = $selectedDay and sPeriod = $sPeriodOnDB")
+                        Toast.makeText(this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        finish()
+                        return true
+                    }
+                    else{
+                        db!!.execSQL("insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
+                        Toast.makeText(this, "과목이 추가되었습니다!", Toast.LENGTH_SHORT).show()
+                        finish()
+                        return true
                     }
                 }
-
-                db.execSQL("insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
+                Log.e(TAG, "와일문 통과")
+                db!!.execSQL("insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
                 Toast.makeText(this, "과목이 추가되었습니다!", Toast.LENGTH_SHORT).show()
                 finish()
                 return true

@@ -65,6 +65,7 @@ class timeTableActivity : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
+        Log.e(TAG, "RESUME")
         loadTable()
     }
 
@@ -78,6 +79,11 @@ class timeTableActivity : AppCompatActivity(){
         val cursor = db.rawQuery("select subject, teacher, day, sPeriod, ePeriod from tb_tt", null)
         while (cursor.moveToNext()){ //한줄한줄...
             textArray[(cursor.getInt(2) * 7) - (7-cursor.getInt(3))-1].setText(subjects[cursor.getInt(0)] + "\n" + teachers[cursor.getInt(1)])
+            Log.e(TAG, cursor.getString(3) + " , " + cursor.getString(4))
+            for (x in cursor.getInt(3) + 1..cursor.getInt(4)){
+                Log.e(TAG, (x).toString())
+                textArray[(cursor.getInt(2) * 7) - (7-x)-1].setText(subjects[cursor.getInt(0)] + "\n" + teachers[cursor.getInt(1)])
+            }
         }
     }
 
