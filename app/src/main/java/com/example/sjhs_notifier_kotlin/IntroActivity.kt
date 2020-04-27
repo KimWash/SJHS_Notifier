@@ -12,12 +12,12 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.util.Log
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
 import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_intro.*
 import java.io.File
@@ -28,8 +28,8 @@ val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest
 
 
 public class IntroActivity : AppCompatActivity()  {
-    private var mDownloadManager:DownloadManager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-    private var mDownloadQueueId:Int? = null
+
+    private var mDownloadQueueId:Long? = null
     private var mFileName:String? = null
     private var lastestVersion:String? = null
     private val SPLASH_TIME = 2000
@@ -91,7 +91,6 @@ public class IntroActivity : AppCompatActivity()  {
             }
             else {
                 Log.d("DEBUG","Permission denied");
-
                 // TODO : 퍼미션이 거부되는 경우에 대한 코드
             }
         }
@@ -106,44 +105,43 @@ public class IntroActivity : AppCompatActivity()  {
             downloadApp(version)
             //TODO: 업데이트 구문
         }
-        lastestVersion = version.toString().split("\\.".toRegex())[0] + version.toString().split("\\.".toRegex())[1]
+        else{
+            checkConnectivity()
+        }
     }
 
     fun downloadApp(version:Double){
-        val versionStr = version.toString().split(".".toRegex())
-        val url = Uri.parse("https://kmnas.asuscomm.com/files/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
+        backupDB.exportDB(this)
+        var mDownloadManager:DownloadManager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val versionStr = version.toString().split("\\.".toRegex())
+        Log.e(TAG, "http://kmnas.asuscomm.com/files/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
+        val url = Uri.parse("http://kmnas.asuscomm.com/files/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
         val request:DownloadManager.Request = DownloadManager.Request(url)
-        request.setTitle("앱 업데이트")
+        request.setTitle("서전고 앱 업데이트")
         request.setDescription("다운로드중이에요...")
-        val pathSegmentList: List<String> = url.pathSegments
-        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/temp").mkdirs();  //경로는 입맛에 따라...바꾸시면됩니다.
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/temp/", pathSegmentList.get(pathSegmentList.size-1) );
-        mFileName = pathSegmentList.get(pathSegmentList.size-1)
-        mDownloadQueueId = mDownloadManager.enqueue(request).toInt()
+        request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI and DownloadManager.Request.NETWORK_MOBILE)
+        mFileName = "sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk"
+        mDownloadQueueId = mDownloadManager.enqueue(request)
+        Log.e(TAG, mFileName + ", " + mDownloadQueueId.toString())
+        lastestVersion = version.toString().split("\\.".toRegex())[0] + "_"+ version.toString().split("\\.".toRegex())[1]
     }
 
-    /**
-     * 다운로드 완료 액션을 받을 리시버.
-     */
     private val mCompleteReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
+            Log.e(TAG, "receiver")
             val action = intent.action
             if (action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
-                Toast.makeText(context, "Complete.", Toast.LENGTH_SHORT).show()
-                val intent1 = Intent()
-                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent1.action = Intent.ACTION_VIEW
-                intent1.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                val localUrl: String =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                        .toString() + "/temp/sjhs_notifier_$lastestVersion.apk" //저장했던 경로..
-                val extension = MimeTypeMap.getFileExtensionFromUrl(localUrl)
-                val mimeType =
-                    MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
-                val file = File(localUrl)
-                intent1.setDataAndType(Uri.fromFile(file), mimeType)
+                val intent = Intent(Intent.ACTION_VIEW)
+                val apkUri = FileProvider.getUriForFile(baseContext, "com.example.sjhs_notifier_kotlin.fileprovider", File(Environment.getExternalStorageDirectory().absolutePath + "/Download/sjhs_notifier_$lastestVersion.apk"))
+                Log.e(TAG, apkUri.toString())
+                intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 try {
-                    startActivity(intent1)
+                    startActivity(intent)
                 } catch (e: ActivityNotFoundException) {
                     Toast.makeText(context, "Not found. Cannot open file.", Toast.LENGTH_SHORT)
                         .show()
@@ -165,8 +163,13 @@ public class IntroActivity : AppCompatActivity()  {
         registerReceiver(mCompleteReceiver, completeFilter)
     }
 
+    fun installApp() {
 
-    @Override
+    }
+
+
+
+        @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isNightModeActive(this)){
@@ -175,14 +178,12 @@ public class IntroActivity : AppCompatActivity()  {
         else if(!isNightModeActive(this)){
             setTheme(R.style.LightTheme)
         }
-
         if(!permissionManager.hasPermissions(this, permissionList)){
             ActivityCompat.requestPermissions(this, permissionList, permissionALL)
         }
         else{
-            checkConnectivity()
+            updateChecker()
         }
-        updateChecker()
         setContentView(R.layout.activity_intro)
         Stetho.initializeWithDefaults(this)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
