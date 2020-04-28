@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_intro.*
+import org.json.JSONObject
 import java.io.File
 
 
@@ -97,12 +98,19 @@ public class IntroActivity : AppCompatActivity()  {
     }
 
     fun updateChecker(){
-        val version = checkUpdate().execute().get()
-        Log.e(TAG, version.toString())
+        Log.e(TAG, "3차")
+        val jsonObject:JSONObject = checkUpdate().execute().get()
+        val version = jsonObject.getDouble("version")
+        val changes = jsonObject.getString("changes")
+        //val version = 1.31
+        //val changes = "fsdff"
+        Log.e(TAG, "4차")
+        Log.e(TAG, "업데이트 있음 버전: $version, 변경점: $changes")
         val versionName = BuildConfig.VERSION_NAME
+
         if (versionName.toDouble() < version){
             var alert_confirm = AlertDialog.Builder(this)
-            alert_confirm.setMessage("앱이 구버전이네요. 업데이트를 진행할게요!")
+            alert_confirm.setMessage("$version 업데이트가 있어요!\n변경점: $changes")
             alert_confirm.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
                 downloadApp(version)
             })
