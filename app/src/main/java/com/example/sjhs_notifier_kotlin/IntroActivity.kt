@@ -88,7 +88,9 @@ public class IntroActivity : AppCompatActivity()  {
         if (Build.VERSION.SDK_INT >= 23){
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.d("DEBUG","Permission: "+permissions[0]+ "was "+grantResults[0])
-                checkConnectivity()
+                if (updateChecker() == 0){
+                    checkConnectivity()
+                }
             }
             else {
                 Log.d("DEBUG","Permission denied");
@@ -97,7 +99,7 @@ public class IntroActivity : AppCompatActivity()  {
         }
     }
 
-    fun updateChecker(){
+    fun updateChecker():Int{
         Log.e(TAG, "3차")
         val jsonObject:JSONObject = checkUpdate().execute().get()
         val version = jsonObject.getDouble("version")
@@ -120,10 +122,12 @@ public class IntroActivity : AppCompatActivity()  {
                 .setIcon(R.drawable.ic_build_black_24dp)
             alert_confirm.show()
             //TODO: 업데이트 구문
+            return 1
         }
         else{
             checkConnectivity()
         }
+        return 0
     }
 
     fun downloadApp(version:Double){
@@ -195,7 +199,6 @@ public class IntroActivity : AppCompatActivity()  {
             }
             if (!permissionManager.hasPermissions(this, permissionList)) {
                 ActivityCompat.requestPermissions(this, permissionList, permissionALL)
-                updateChecker()
             } else {
                 updateChecker()
             }

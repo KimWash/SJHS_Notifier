@@ -54,12 +54,17 @@ class editTableActivity : AppCompatActivity()  {
             ePeriod = cursor.getInt(0)
             Log.e(TAG, "---------------범위불러오기----------------\n$day , $period , $ePeriod")
             if (period < ePeriod){
-                for (x in period..ePeriod!!){
-                    Log.e(TAG, "$x")
-                    ranges!!.add(x)
-                }
+                try{
+                    for (x in period..ePeriod!!){
+                        Log.e(TAG, "$x")
+                        ranges!!.add(x)
+
                 Log.e(TAG, ranges.toString())
                 return ranges!!
+                    }
+                }catch (e: KotlinNullPointerException){
+                    Toast.makeText(this, "죄송합니다, 현재는 시간표에서 직접 수정할 시 두시간 이상 있는 과목은 수정이 불가합니다.\n양해 부탁드립니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         return arrayListOf(0)
