@@ -101,8 +101,16 @@ public class IntroActivity : AppCompatActivity()  {
         Log.e(TAG, version.toString())
         val versionName = BuildConfig.VERSION_NAME
         if (versionName.toDouble() < version){
-            Toast.makeText(this, "앱이 구버전이네요. 업데이트를 진행할게요!", Toast.LENGTH_SHORT)
-            downloadApp(version)
+            var alert_confirm = AlertDialog.Builder(this)
+            alert_confirm.setMessage("앱이 구버전이네요. 업데이트를 진행할게요!")
+            alert_confirm.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
+                downloadApp(version)
+            })
+            alert_confirm
+                .setTitle("업데이트")
+                .create()
+                .setIcon(R.drawable.ic_build_black_24dp)
+            alert_confirm.show()
             //TODO: 업데이트 구문
         }
         else{
@@ -111,7 +119,6 @@ public class IntroActivity : AppCompatActivity()  {
     }
 
     fun downloadApp(version:Double){
-        backupDB.exportDB(this)
         var mDownloadManager:DownloadManager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val versionStr = version.toString().split("\\.".toRegex())
         Log.e(TAG, "http://kmnas.asuscomm.com/files/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
@@ -140,6 +147,7 @@ public class IntroActivity : AppCompatActivity()  {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                finish()
                 try {
                     startActivity(intent)
                 } catch (e: ActivityNotFoundException) {
@@ -171,35 +179,27 @@ public class IntroActivity : AppCompatActivity()  {
 
         @Override
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (isNightModeActive(this)){
-            setTheme(R.style.DarkTheme)
+            super.onCreate(savedInstanceState)
+            if (isNightModeActive(this)) {
+                setTheme(R.style.DarkTheme)
+            } else if (!isNightModeActive(this)) {
+                setTheme(R.style.LightTheme)
+            }
+            if (!permissionManager.hasPermissions(this, permissionList)) {
+                ActivityCompat.requestPermissions(this, permissionList, permissionALL)
+                updateChecker()
+            } else {
+                updateChecker()
+            }
+            setContentView(R.layout.activity_intro)
+            Stetho.initializeWithDefaults(this)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            if (isNightModeActive(this)) {
+                imageView.setImageResource(R.drawable.splash_dark)
+            } else if (!isNightModeActive(this)) {
+                imageView.setImageResource(R.drawable.splash)
+            }
         }
-        else if(!isNightModeActive(this)){
-            setTheme(R.style.LightTheme)
-        }
-        if(!permissionManager.hasPermissions(this, permissionList)){
-            ActivityCompat.requestPermissions(this, permissionList, permissionALL)
-        }
-        else{
-            updateChecker()
-        }
-        setContentView(R.layout.activity_intro)
-        Stetho.initializeWithDefaults(this)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        if (isNightModeActive(this)){
-            imageView.setImageResource(R.drawable.splash_dark)
-        }
-        else if(!isNightModeActive(this)){
-            imageView.setImageResource(R.drawable.splash)
-        }
-
-
-
-
-
-
-    }
 
 
     override fun onBackPressed(){
