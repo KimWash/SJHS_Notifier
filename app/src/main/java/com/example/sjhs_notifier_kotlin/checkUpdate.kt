@@ -16,7 +16,7 @@ class checkUpdate(): AsyncTask<Void, Int, JSONObject>(){
         try {
             // 서버연결
             val url = URL(
-                "https://yoon-lab.xyz/lastest_version.json"
+                "https://yoon-lab.xyz/sjhsnotifier/lastest_version.json"
             )
             val conn = url.openConnection() as HttpURLConnection
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
