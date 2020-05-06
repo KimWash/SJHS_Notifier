@@ -47,22 +47,24 @@ class editTableActivity : AppCompatActivity()  {
 
     fun getSubject(day:Int, period:Int): MutableList<Int>{
         val db = helper!!.readableDatabase
-        val cursor = db!!.rawQuery("select ePeriod from tb_tt where day = $day and sPeriod = $period", null)
+        val cursor = db!!.rawQuery("select sPeriod, ePeriod from tb_tt where day = $day", null)
+        var sPeriod:Int? = null
         var ePeriod:Int? = null
-        val ranges:MutableList<Int>? = null
+        val ranges:MutableList<Int> = arrayListOf()
         while (cursor.moveToNext()){
-            ePeriod = cursor.getInt(0)
+            sPeriod = cursor.getInt(0)
+            ePeriod = cursor.getInt(1)
             Log.e(TAG, "---------------범위불러오기----------------\n$day , $period , $ePeriod")
-            if (period < ePeriod){
+            if (period in sPeriod..ePeriod){
                 try{
-                    for (x in period..ePeriod!!){
-                        Log.e(TAG, "$x")
-                        ranges!!.add(x)
-
-                Log.e(TAG, ranges.toString())
-                return ranges!!
+                    for (x in sPeriod..ePeriod){
+                        Log.e(TAG, "$x 차")
+                        ranges.add(x)
                     }
+                    Log.e(TAG, ranges.toString())
+                    return ranges
                 }catch (e: KotlinNullPointerException){
+                    Log.e(TAG, e.toString())
                     Toast.makeText(this, "죄송합니다, 현재는 시간표에서 직접 수정할 시 두시간 이상 있는 과목은 수정이 불가합니다.\n양해 부탁드립니다.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -88,6 +90,7 @@ class editTableActivity : AppCompatActivity()  {
         val gotperiod = editIntent.getIntExtra("period", 35)
         when (activityFrom){
             0 -> {
+                Log.e(TAG, "직접수정")
                 daySpinner.setSelection(0, false)
                 sPeriodSpinner.setSelection(0, false)}
             1 -> {
@@ -95,14 +98,19 @@ class editTableActivity : AppCompatActivity()  {
                     Toast.makeText(this, "오류가 발생한 것 같습니다. 에러코드: 35", Toast.LENGTH_SHORT)
                 }
                 else{
+                    Log.e(TAG, "교시클릭")
                     day = gotperiod / 7
                     selectedDay = day!! + 1
                     period = gotperiod % 7
-                    selectedsPeriod = period!! + 1
                     val range = getSubject(day!!+1, period!!+1)
+                    selectedsPeriod = range[0]
                     selectedePeriod = range[range.size-1]
+                    if (selectedsPeriod == 0 && selectedePeriod == 0){
+                        selectedsPeriod = (gotperiod % 7) + 1
+                        selectedePeriod = (gotperiod % 7) + 1
+                    }
 
-                    Log.e(TAG, "$day+$period+$selectedePeriod")
+                    Log.e(TAG, "$day, $selectedsPeriod, $selectedePeriod")
                 }
             }
             2 -> {}
@@ -176,7 +184,8 @@ class editTableActivity : AppCompatActivity()  {
         sPeriodSpinner.adapter = periodAdapter
         sPeriodSpinner.setSelection(0, false)
         if (activityFrom == 1){
-            sPeriodSpinner.setSelection(period!! + 1, false)
+            Log.e(TAG, "$selectedsPeriod 교시 선택함")
+            sPeriodSpinner.setSelection(selectedsPeriod, false)
             sPeriodSpinner.isEnabled = true
             sPeriodSpinner.isClickable = true
             ePeriodSpinner.isEnabled = true
@@ -185,7 +194,7 @@ class editTableActivity : AppCompatActivity()  {
             daySpinner.isClickable = true
             val ePeriodItems = mutableListOf<String>()
             for (x in 1..periodItems.size - 1){
-                if (periodItems[x].split("교".toRegex())[0].toInt() >= period!! + 1){
+                if (periodItems[x].split("교".toRegex())[0].toInt() >= selectedsPeriod){
                     ePeriodItems.add((x).toString() + "교시")
                 }
             }
@@ -219,7 +228,7 @@ class editTableActivity : AppCompatActivity()  {
 
         ePeriodSpinner.setSelection(0, false)
         if (activityFrom == 1){
-            ePeriodSpinner.setSelection(selectedePeriod, false)
+            ePeriodSpinner.setSelection(selectedePeriod - selectedsPeriod, false)
         }
         ePeriodSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -250,27 +259,29 @@ class editTableActivity : AppCompatActivity()  {
                 //같은 교시에 있는지 확인하기
                 val cursor = db!!.rawQuery("select subject, teacher, day, sPeriod, ePeriod from tb_tt", null)
                 val cursor2 = db!!.rawQuery("select ePeriod from tb_tt where day = $selectedDay", null)
-                Log.e(TAG, cursor.count.toString())
+                Log.e(TAG, "DB " + cursor.count.toString() + " 줄 존재")
                 while (cursor.moveToNext()){
                     Log.e(TAG, "와일문 진입")
-                    Log.e("DEBUG", "sPeriod" + cursor.getString(3))
                     var sPeriodOnDB = cursor.getInt(3)
                     var ePeriodOnDB = cursor.getInt(4)
                     var dayOnDB = cursor.getInt(2)
-                    Log.e(TAG, "DB상 시작 $sPeriodOnDB , 선택된 시작 $selectedsPeriod , DB상 끝 $ePeriodOnDB , 선택된 끝$selectedePeriod")
+                    Log.e(TAG, "DB상 시작 $sPeriodOnDB , DB상 끝 $ePeriodOnDB , 선택된 시작 $selectedsPeriod , 선택된 끝$selectedePeriod")
 
                     if(selectedsPeriod in sPeriodOnDB..ePeriodOnDB && selectedePeriod > ePeriodOnDB){
+                        Log.e(TAG, "과목변경 실패, 동일시간에 수업 존재")
                         Toast.makeText(this, "그 시간에는 이미 수업이 있습니다!", Toast.LENGTH_SHORT).show()
                         finish()
                         return true
                     }
-                    else if (sPeriodOnDB <= selectedsPeriod && sPeriodOnDB in sPeriodOnDB..ePeriodOnDB){
+                    else if (dayOnDB == selectedDay && sPeriodOnDB >= selectedsPeriod && ePeriodOnDB <= selectedePeriod){
+                        Log.e(TAG, "과목수정(과목: $selectedSubject, 교사: $selectedTeacher, 요일: $selectedDay, 시작교시: $selectedsPeriod, 끝나는교시: $selectedePeriod)")
                         db!!.execSQL("update tb_tt set subject = $selectedSubject, teacher = $selectedTeacher, sPeriod = $selectedsPeriod, ePeriod = $selectedePeriod where day = $selectedDay and sPeriod = $sPeriodOnDB")
                         Toast.makeText(this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                         finish()
                         return true
                     }
                     else{
+                        Log.e(TAG, "과목추가(과목: $selectedSubject, 교사: $selectedTeacher, 요일: $selectedDay, 시작교시: $selectedsPeriod, 끝나는교시: $selectedePeriod)")
                         db!!.execSQL("insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
                         Toast.makeText(this, "과목이 추가되었습니다!", Toast.LENGTH_SHORT).show()
                         finish()
