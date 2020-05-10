@@ -30,6 +30,9 @@ val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest
 
 public class IntroActivity : AppCompatActivity()  {
 
+
+
+
     private var mDownloadQueueId:Long? = null
     private var mFileName:String? = null
     private var lastestVersion:String? = null
@@ -99,6 +102,12 @@ public class IntroActivity : AppCompatActivity()  {
         }
     }
 
+    fun getVersionInfo(context: Context): String {
+        val i = context.packageManager.getPackageInfo(context.packageName, 0)
+        return i.versionName
+    }
+
+
     fun updateChecker():Int{
         Log.e(TAG, "3차")
         val jsonObject:JSONObject = checkUpdate().execute().get()
@@ -108,7 +117,7 @@ public class IntroActivity : AppCompatActivity()  {
         //val changes = "fsdff"
         Log.e(TAG, "4차")
         Log.e(TAG, "업데이트 있음 버전: $version, 변경점: $changes")
-        val versionName = BuildConfig.VERSION_NAME
+        val versionName = getVersionInfo(this)
 
         if (versionName.toDouble() < version){
             var alert_confirm = AlertDialog.Builder(this)
@@ -133,8 +142,8 @@ public class IntroActivity : AppCompatActivity()  {
     fun downloadApp(version:Double){
         var mDownloadManager:DownloadManager = this.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val versionStr = version.toString().split("\\.".toRegex())
-        Log.e(TAG, "http://kmnas.asuscomm.com/files/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
-        val url = Uri.parse("http://kmnas.asuscomm.com/files/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
+        Log.e(TAG, "https://yoon-lab.xyz/sjhsnotifier/files/apk/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
+        val url = Uri.parse("https://yoon-lab.xyz/sjhsnotifier/files/apk/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
         val request:DownloadManager.Request = DownloadManager.Request(url)
         request.setTitle("서전고 앱 업데이트")
         request.setDescription("다운로드중이에요...")

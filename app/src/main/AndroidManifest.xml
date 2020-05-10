@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/LightTheme"
+        android:requestLegacyExternalStorage="true"
         >
 
         <provider
