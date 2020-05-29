@@ -41,6 +41,8 @@ public class settingActivity : AppCompatActivity()  {
         getSupportActionBar()?.title = "설정"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
+        versiontext.setText("Version: ${getVersionInfo(this)}")
+
 
         backupButton.setOnClickListener {
             if(!permissionManager.hasPermissions(this, permissionList)){

@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -191,6 +193,6 @@ class MainActivity : AppCompatActivity() {
         var settingButton = findViewById<LinearLayout>(R.id.setting)
         settingButton.setOnClickListener { val settingIntent = Intent(this@MainActivity, settingActivity::class.java); startActivity(settingIntent) }
 
-
+        selfTestButton.setOnClickListener{val testIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://eduro.cbe.go.kr/hcheck/index.jsp")); startActivity(testIntent)}
     }
 }

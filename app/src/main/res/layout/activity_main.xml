@@ -124,7 +124,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="7.5dp">
+                android:layout_marginTop="7.5dp"
+                android:layout_marginBottom="7.5dp">
                 <TextView
                     android:id="@+id/timetable"
                     android:layout_width="match_parent"
@@ -140,6 +141,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="나만의 시간표를 확인하세요."
+                    android:textColor="?attr/textColor"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:id="@+id/selfTestButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="7.5dp">
+                <TextView
+                    android:id="@+id/selftest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rbt_meduim"
+                    android:text="✔️ 코로나 19 자가진단"
+                    android:textColor="?attr/titleColor"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/selfTextContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="등교하기 전, 자가진단했나요?"
                     android:textColor="?attr/textColor"
                     android:textSize="16sp" />
             </LinearLayout>
