@@ -18,6 +18,7 @@
         <item name="android:listDivider">@color/dividerColor</item>
         <item name="android:textColor">#909090</item>
         <item name="tablemargin">10</item>
+        <item name="fontFamily">@font/apple_medium</item>
         <item name="android:navigationBarColor">?attr/bgColor</item>
     </style>
 
@@ -27,9 +28,52 @@
         <item name="android:paddingTop">5dp</item>
         <item name="android:gravity">center</item>
         <item name="tileBG">?attr/tileBG</item>
+        <item name="fontFamily">@font/apple_medium</item>
+    </style>
+
+    <style name="DarkDialog" parent="Theme.AppCompat.Dialog">
+        <item name="fontFamily">@font/apple_medium</item>
+        <item name="android:colorBackground">#080808</item>
+        <item name="colorPrimary">#080808</item>
+        <item name="colorPrimaryDark">#080808</item>
+        <item name="bgColor">#080808</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="textColor">#999999</item>
+        <item name="titleColor">#fafafa</item>
+        <item name="tileBG">#252525</item>
+        <item name="selectedColor">#0381fe</item>
+        <item name="borderColor">#252525</item>
+        <item name="unSelectedColor">#fafafa</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor">?attr/bgColor</item>
+    </style>
+
+    <style name="LightDialog" parent="Theme.AppCompat.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="android:colorBackground">#F2F2F2</item>
+        <item name="colorPrimaryDark">#F2F2F2</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="textColor">#909090</item>
+        <item name="titleColor">#000000</item>
+        <item name="bgColor">#F2F2F2</item>
+        <item name="tileBG">#F6F6F6</item>
+        <item name="selectedColor">#0381fe</item>
+        <item name="borderColor">#d6d6d6</item>
+        <item name="unSelectedColor">#080808</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:listDivider">@color/dividerColor</item>
+        <item name="android:textColor">#909090</item>
+        <item name="tablemargin">10</item>
+        <item name="fontFamily">@font/apple_medium</item>
+        <item name="android:navigationBarColor">?attr/bgColor</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat">
+        <item name="fontFamily">@font/apple_medium</item>
         <item name="android:colorBackground">#080808</item>
         <item name="colorPrimary">#080808</item>
         <item name="colorPrimaryDark">#080808</item>
@@ -49,7 +93,7 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/rbt_regular</item>
+        <item name="fontFamily">@font/apple_semibold</item>
         <item name="android:textSize">19sp</item>
         <item name="android:textColorPrimary">?attr/titleColor</item>
         <item name="android:textColorSecondary">?attr/titleColor</item>
@@ -58,11 +102,12 @@
     </style>
 
     <style name="CalendarTheme" parent="Theme.AppCompat">
+        <item name="fontFamily">@font/apple_medium</item>
         <item name="android:textColorPrimary">?attr/textColor</item>
         <item name="android:textColor">?attr/textColor</item>
         <item name="android:textColorSecondary">?attr/textColor</item>
     </style>
     <style name="bNav" parent="Theme.AppCompat">
-        <item name="android:fontFamily">@font/rbt_regular</item>
+        <item name="android:fontFamily">@font/apple_medium</item>
     </style>
 </resources>

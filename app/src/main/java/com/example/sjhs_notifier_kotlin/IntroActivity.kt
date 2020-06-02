@@ -30,9 +30,6 @@ val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest
 
 public class IntroActivity : AppCompatActivity()  {
 
-
-
-
     private var mDownloadQueueId:Long? = null
     private var mFileName:String? = null
     private var lastestVersion:String? = null
@@ -96,7 +93,7 @@ public class IntroActivity : AppCompatActivity()  {
                 }
             }
             else {
-                Log.d("DEBUG","Permission denied");
+                Log.d("DEBUG","Permission denied")
                 // TODO : 퍼미션이 거부되는 경우에 대한 코드
             }
         }
@@ -106,7 +103,6 @@ public class IntroActivity : AppCompatActivity()  {
         val i = context.packageManager.getPackageInfo(context.packageName, 0)
         return i.versionName
     }
-
 
     fun updateChecker():Int{
         Log.e(TAG, "3차")
@@ -180,7 +176,6 @@ public class IntroActivity : AppCompatActivity()  {
         }
     }
 
-
     override fun onPause() {
         super.onPause()
         unregisterReceiver(mCompleteReceiver)
@@ -192,13 +187,7 @@ public class IntroActivity : AppCompatActivity()  {
         registerReceiver(mCompleteReceiver, completeFilter)
     }
 
-    fun installApp() {
-
-    }
-
-
-
-        @Override
+    @Override
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             if (isNightModeActive(this)) {

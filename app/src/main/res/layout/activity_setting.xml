@@ -76,7 +76,6 @@
                         android:id="@+id/resetTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rbt_meduim"
                         android:text="시간표 초기화"
                         android:textColor="?attr/titleColor"
                         android:textSize="19sp" />
@@ -107,7 +106,6 @@
                             android:id="@+id/reportTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/rbt_meduim"
                             android:text="오류/버그 신고하기"
                             android:textColor="?attr/titleColor"
                             android:textSize="19sp" />
@@ -137,7 +135,6 @@
                             android:id="@+id/backupTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/rbt_meduim"
                             android:text="시간표 백업"
                             android:textColor="?attr/titleColor"
                             android:textSize="19sp" />

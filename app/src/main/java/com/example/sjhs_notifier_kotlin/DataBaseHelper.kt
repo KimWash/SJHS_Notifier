@@ -12,7 +12,9 @@ class DataBaseHelper (context: Context): SQLiteOpenHelper(context, "tableDB", nu
                 "teacher int(10) NOT NULL," +
                 "day int(10) NOT NULL," +
                 "sPeriod int(10) NOT NULL," +
-                "ePeriod int(10) NOT NULL)"
+                "ePeriod int(10) NOT NULL," +
+                "stClass int(10) NOT NULL," +
+                "stGroup int(10) NOT NULL)"
         db?.execSQL(tableSQL)
     }
 

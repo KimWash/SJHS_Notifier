@@ -14,7 +14,7 @@ import org.json.JSONException
 object PreferenceManager {
     const val PREFERENCES_NAME = "rebuild_preference"
     private const val DEFAULT_VALUE_STRING = ""
-    private const val DEFAULT_VALUE_BOOLEAN = false
+    private const val DEFAULT_VALUE_BOOLEAN = true
     private const val DEFAULT_VALUE_INT = -1
     private const val DEFAULT_VALUE_LONG = -1L
     private const val DEFAULT_VALUE_FLOAT = -1f

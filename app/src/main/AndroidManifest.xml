@@ -45,8 +45,10 @@
         </activity>
 
         <activity android:name=".timeTableActivity" android:parentActivityName=".MainActivity">
-
         </activity>
+
+        <activity android:name=".setClassActivity" android:theme="@style/LightDialog"/>
+
         <activity android:name=".editTableActivity" android:parentActivityName=".timeTableActivity">
 
         </activity>

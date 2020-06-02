@@ -26,11 +26,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/rbt_regular"
                 android:lineSpacingExtra="5pt"
                 android:text="환영메시지"
+                android:fontFamily="@font/apple_ultralight"
                 android:textColor="?attr/titleColor"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textStyle="normal|bold"/>
 
 
         </LinearLayout>
@@ -66,10 +67,11 @@
                     android:id="@+id/mealName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rbt_meduim"
                     android:text="오늘의 식단"
+                    android:fontFamily="@font/apple_bold"
                     android:textColor="?attr/titleColor"
-                    android:textSize="19sp" />
+                    android:textSize="19sp"
+                    />
 
                 <TextView
                     android:id="@+id/meal"
@@ -98,7 +100,6 @@
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rbt_meduim"
                     android:text="📅 이달의 학사일정"
                     android:textColor="?attr/titleColor"
                     android:textSize="19sp" />
@@ -130,7 +131,6 @@
                     android:id="@+id/timetable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rbt_meduim"
                     android:text="⏰ 시간표"
                     android:textColor="?attr/titleColor"
                     android:textSize="19sp" />
@@ -201,7 +201,6 @@
                     android:id="@+id/settingTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rbt_meduim"
                     android:text="⚙️ 설정"
                     android:textColor="?attr/titleColor"
                     android:textSize="19sp" />

@@ -15,8 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import kotlinx.android.synthetic.main.activity_main.*
+import kr.go.neis.api.Menu
 import kr.go.neis.api.School
 import java.text.SimpleDateFormat
+import java.time.Month
 import java.util.*
 
 
@@ -93,9 +95,13 @@ class MainActivity : AppCompatActivity() {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         val thread = Thread(Runnable {
+            val cal = Calendar.getInstance()
+            cal.set(gotyear,gotmonth,day)
+            val lastDayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+
             val school = School(School.Type.HIGH, School.Region.CHUNGBUK, "M100002171") //setSchool
             val schedule = school.getMonthlySchedule(gotyear, gotmonth) //get Schedule
-            val menu = school.getMonthlyMenu(gotyear, gotmonth) // get Menu
+            var menu = school.getMonthlyMenu(gotyear, gotmonth)
             runOnUiThread {
                 // UI Update
                 if (hour in 0..7 && checkNull(menu[day-1].breakfast) == false){
@@ -112,6 +118,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 else if (hour in 19..23 && checkNull(menu[day].breakfast) == false){
                     mealName.setText("\uD83C\uDF5C️ 내일의 아침")
+                    if (day == lastDayOfMonth){
+                        menu = school.getMonthlyMenu(gotyear, gotmonth+1) // get Menu
+                    }
                     meal.setText(menu[day].breakfast)
                 }
                 else {
