@@ -54,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         app:autoSizeTextType="uniform"
+                        android:textColor="?attr/selectedColor"
                         android:text="월"
                         />
                     <TextView
@@ -61,6 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         app:autoSizeTextType="uniform"
+                        android:textColor="?attr/selectedColor"
                         android:text="화"
                         />
                     <TextView
@@ -68,6 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         app:autoSizeTextType="uniform"
+                        android:textColor="?attr/selectedColor"
                         android:text="수"
                         />
                     <TextView
@@ -75,6 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         app:autoSizeTextType="uniform"
+                        android:textColor="?attr/selectedColor"
                         android:text="목"
                         />
                     <TextView
@@ -82,6 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         app:autoSizeTextType="uniform"
+                        android:textColor="?attr/selectedColor"
                         android:text="금"
                         />
 
@@ -97,6 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/hi"
+                        android:textColor="?attr/selectedColor"
                         />
                 </TableRow>
 
@@ -109,6 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/first"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject0"
@@ -167,6 +174,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/second"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject1"
@@ -222,6 +230,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/thrd"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject2"
@@ -275,6 +284,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/fourth"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject3"
@@ -328,6 +338,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/lunch"
+                        android:textColor="?attr/selectedColor"
                         />
 
                 </TableRow>
@@ -340,6 +351,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/fiveth"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject4"
@@ -393,6 +405,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/sixth"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject5"
@@ -446,6 +459,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="@string/seventh"
+                        android:textColor="?attr/selectedColor"
                         app:autoSizeTextType="uniform"/>
                     <TextView
                         android:id="@+id/subject6"

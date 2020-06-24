@@ -73,7 +73,7 @@ class mealActivity : AppCompatActivity() {
         getSupportActionBar()?.title = "식단표"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
-        getAvailableMeals(getTime(0), getTime(1), getTime(2))
+        getAvailableMeals(getTime(0), getTime(1)-1, getTime(2))
 
         var thread = Thread(Runnable {
             runOnUiThread({
@@ -84,7 +84,7 @@ class mealActivity : AppCompatActivity() {
         val thread2 = Thread(Runnable {
             runOnUiThread {
                 val calendarViewfun = findViewById<CalendarView>(R.id.calendarView)
-                calendarViewfun?.setOnDateChangeListener { view, year, month, dayOfMonth -> getAvailableMeals(year, month, dayOfMonth)}
+                calendarViewfun?.setOnDateChangeListener { view, year, month, dayOfMonth -> Log.e(TAG, "$month, $dayOfMonth"); getAvailableMeals(year, month, dayOfMonth)}
             }
         }).start()
     }

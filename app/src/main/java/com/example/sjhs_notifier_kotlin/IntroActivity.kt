@@ -201,6 +201,11 @@ public class IntroActivity : AppCompatActivity()  {
         @Override
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+
+            val intent = getIntent()
+            if (intent != null){
+                val notiData = intent.getStringExtra("category")
+            }
             if (isNightModeActive(this)) {
                 setTheme(R.style.DarkTheme)
             } else if (!isNightModeActive(this)) {

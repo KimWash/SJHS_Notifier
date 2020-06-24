@@ -76,7 +76,7 @@
                         android:id="@+id/resetTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/rbt_meduim"
+                        android:fontFamily="@font/apple_medium"
                         android:text="시간표 초기화"
                         android:textColor="?attr/titleColor"
                         android:textSize="19sp" />
@@ -90,37 +90,7 @@
                         android:textColor="?attr/textColor"
                         android:textSize="16sp" />
                 </LinearLayout>
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1.5dp"
-                        android:background="?android:attr/listDivider" />
 
-                    <LinearLayout
-                        android:id="@+id/reportButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginTop="7.5dp"
-                        android:layout_marginBottom="7.5dp">
-                        <TextView
-                            android:id="@+id/reportTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/rbt_meduim"
-                            android:text="오류/버그 신고하기"
-                            android:textColor="?attr/titleColor"
-                            android:textSize="19sp" />
-
-                        <TextView
-                            android:id="@+id/reportContent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="오류/버그를 신고합니다."
-                            android:textColor="?attr/textColor"
-                            android:textSize="16sp" />
-                    </LinearLayout>
                     <View
                         android:id="@+id/divider2"
                         android:layout_width="match_parent"
@@ -137,7 +107,7 @@
                             android:id="@+id/backupTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/rbt_meduim"
+                            android:fontFamily="@font/apple_medium"
                             android:text="시간표 백업"
                             android:textColor="?attr/titleColor"
                             android:textSize="19sp" />
@@ -152,14 +122,105 @@
                             android:textSize="16sp" />
                     </LinearLayout>
 
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:layout_marginTop="7.5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:id="@+id/importButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="7.5dp">
+                        <TextView
+                            android:id="@+id/importTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/apple_medium"
+                            android:text="시간표 가져오기"
+                            android:textColor="?attr/titleColor"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/contentTable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="백업 한 시간표를 가져옵니다."
+                            android:textColor="?attr/textColor"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="7.5dp"
+                        android:layout_height="1.5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:id="@+id/reportButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="7.5dp"
+                        android:layout_marginBottom="7.5dp">
+                        <TextView
+                            android:id="@+id/reportTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/apple_medium"
+                            android:text="오류/버그 신고하기"
+                            android:textColor="?attr/titleColor"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/reportContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="오류/버그를 신고합니다."
+                            android:textColor="?attr/textColor"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:layout_marginTop="7.5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:id="@+id/credit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="7.5dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/apple_medium"
+                            android:text="버전"
+                            android:textColor="?attr/titleColor"
+                            android:textSize="19sp" />
+
+                        <TextView
+                            android:id="@+id/versiontext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text=""
+                            android:textColor="?attr/textColor"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/versiontext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Version: "
-                    android:layout_gravity="bottom|center_horizontal">
-                </TextView>
+
             </LinearLayout>
 
         </ScrollView>

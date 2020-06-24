@@ -71,6 +71,7 @@
                             android:layout_height="match_parent"
                             android:text=""
                             android:textColor="?attr/textColor"
+                            android:fontFamily="@font/apple_regular"
                             android:textSize="16sp" />
 
                     </LinearLayout>
@@ -93,6 +94,8 @@
             android:foregroundGravity="bottom"
             android:paddingBottom="15dp"
             android:theme="@style/bNav"
+            app:itemTextColor="@color/bottom_nav_color"
+            app:itemIconTint="@color/bottom_nav_color"
             app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu">

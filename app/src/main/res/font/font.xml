@@ -3,13 +3,26 @@
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/rbt_meduim"/>
+        android:font = "@font/apple_light"/>
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/rbt_regular"/>
+        android:font = "@font/apple_regular"/>
+    <font
+    android:fontStyle = "normal"
+    android:fontWeight = "400"
+    android:font = "@font/apple_medium"/>
     <font
         android:fontStyle = "normal"
         android:fontWeight = "400"
-        android:font = "@font/rbt_light"/>
+        android:font = "@font/apple_semibold"/>
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/apple_bold"/>
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/apple_extrabold"/>
+
 </font-family>

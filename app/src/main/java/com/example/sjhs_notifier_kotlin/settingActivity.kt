@@ -1,23 +1,19 @@
 package com.example.sjhs_notifier_kotlin
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
-import android.os.Bundle
 import android.content.Intent
 import android.content.pm.PackageInfo
+import android.database.Cursor
+import android.net.Uri
 import android.os.Build
-import android.util.Log
-import android.widget.Button
+import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_meal.*
 import kotlinx.android.synthetic.main.activity_setting.*
+
 
 val TAG = "DEBUG"
 public class settingActivity : AppCompatActivity()  {
@@ -28,6 +24,28 @@ public class settingActivity : AppCompatActivity()  {
         return version
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == RESULT_OK){
+            val fileUri = data?.data
+            getRealPathFromURI(fileUri!!)
+        }
+
+    }
+
+    private fun getRealPathFromURI(contentURI: Uri): String? {
+        val result: String?
+        val cursor: Cursor? = contentResolver.query(contentURI, null, null, null, null)
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.path
+        } else {
+            cursor.moveToFirst()
+            val idx: Int = cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA)
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        return result
+    }
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         if (MainActivity.isNightModeActive(this)) {
@@ -41,7 +59,7 @@ public class settingActivity : AppCompatActivity()  {
         getSupportActionBar()?.title = "설정"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
 
-        versiontext.setText("Version: ${getVersionInfo(this)}")
+        versiontext.setText("${getVersionInfo(this)}")
 
 
         backupButton.setOnClickListener {
@@ -66,6 +84,14 @@ public class settingActivity : AppCompatActivity()  {
             }
 
         }
+
+        importButton.setOnClickListener{
+            Toast.makeText(this, "죄송합니다, 준비중인 기능입니다.", Toast.LENGTH_SHORT)
+            //val fileSIntent = Intent(Intent.ACTION_GET_CONTENT)
+            //fileSIntent.setType("*/*")
+            //startActivityForResult(fileSIntent, 1)
+        }
+
 
         var sendreport = findViewById<LinearLayout>(R.id.reportButton)
         sendreport.setOnClickListener {

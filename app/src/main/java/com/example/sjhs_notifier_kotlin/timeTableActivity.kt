@@ -34,7 +34,7 @@ class timeTableActivity : AppCompatActivity(){
                 setTable(x)
             }
         }
-        val alert_confirm =
+        /**val alert_confirm =
             AlertDialog.Builder(this)
         alert_confirm.setMessage("현재는 시간표에서 직접 수정할 시 두시간 이상 있는 과목은 수정이 불가합니다.\n빠른 시일내에 수정하겠습니다. \uD83D\uDE47\uD83C\uDFFB").setCancelable(false)
             .setPositiveButton(
@@ -42,7 +42,7 @@ class timeTableActivity : AppCompatActivity(){
             ) { dialog, which ->
             }
         val alert = alert_confirm.create()
-        alert.show()
+        alert.show()**/
     }
 
     fun setTable(period:Int){
