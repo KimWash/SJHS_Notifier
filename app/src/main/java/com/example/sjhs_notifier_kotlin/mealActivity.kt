@@ -24,6 +24,13 @@ import java.util.Date
 
 class mealActivity : AppCompatActivity() {
 
+    fun checkConnectivity():Boolean{
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        val status = networkInfo != null && networkInfo.isConnected
+        return status
+    }
+
     var date:Long = 0
     val yearFormat = SimpleDateFormat("yyyy")
     val monthFormat = SimpleDateFormat("MM")
@@ -62,6 +69,7 @@ class mealActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (MainActivity.isNightModeActive(this) == true) {
             setTheme(R.style.DarkTheme)
         } else if (MainActivity.isNightModeActive(this) == false) {
@@ -72,21 +80,35 @@ class mealActivity : AppCompatActivity() {
         setSupportActionBar(mealToolbar)
         getSupportActionBar()?.title = "식단표"
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        if (checkConnectivity() == false){
+            val alert_confirm =
+                AlertDialog.Builder(this)
+            alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
+                .setPositiveButton(
+                    "확인"
+                ) { dialog, which ->
+                    // 'YES'
+                    finish()
+                }
+            val alert = alert_confirm.create()
+            alert.show()
+        }
+        else{
+            getAvailableMeals(getTime(0), getTime(1)-1, getTime(2))
 
-        getAvailableMeals(getTime(0), getTime(1)-1, getTime(2))
-
-        var thread = Thread(Runnable {
-            runOnUiThread({
-                var bottomNavigationView = findViewById<BottomNavigationView>(R.id.bMenu)
-                bottomNavigationView?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-            })
-        }).start()
-        val thread2 = Thread(Runnable {
-            runOnUiThread {
-                val calendarViewfun = findViewById<CalendarView>(R.id.calendarView)
-                calendarViewfun?.setOnDateChangeListener { view, year, month, dayOfMonth -> Log.e(TAG, "$month, $dayOfMonth"); getAvailableMeals(year, month, dayOfMonth)}
-            }
-        }).start()
+            var thread = Thread(Runnable {
+                runOnUiThread({
+                    var bottomNavigationView = findViewById<BottomNavigationView>(R.id.bMenu)
+                    bottomNavigationView?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+                })
+            }).start()
+            val thread2 = Thread(Runnable {
+                runOnUiThread {
+                    val calendarViewfun = findViewById<CalendarView>(R.id.calendarView)
+                    calendarViewfun?.setOnDateChangeListener { view, year, month, dayOfMonth -> Log.e(TAG, "$month, $dayOfMonth"); getAvailableMeals(year, month, dayOfMonth)}
+                }
+            }).start()
+        }
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->

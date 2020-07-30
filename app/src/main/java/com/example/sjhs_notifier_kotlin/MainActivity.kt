@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
@@ -156,9 +157,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun checkConnectivity():Boolean{
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        val status = networkInfo != null && networkInfo.isConnected
+        return status
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getInformations(getTime(0), getTime(1), getTime(2), getTime(3))
+        if (checkConnectivity() == false){
+            val alert_confirm =
+                AlertDialog.Builder(this)
+            alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
+                .setPositiveButton(
+                    "확인"
+                ) { dialog, which ->
+                    // 'YES'
+                }
+            val alert = alert_confirm.create()
+            alert.show()
+            meal.setText("인터넷에 연결되어 있지 않습니다.")
+            schedules.setText("인터넷에 연결되어 있지 않습니다.")
+        }
+        else{
+            getInformations(getTime(0), getTime(1), getTime(2), getTime(3))
+        }
+
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
         if (isNightModeActive(this)){

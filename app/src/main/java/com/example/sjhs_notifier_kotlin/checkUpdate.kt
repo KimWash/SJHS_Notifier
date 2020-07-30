@@ -9,6 +9,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import java.net.UnknownHostException
 
 class checkUpdate(): AsyncTask<Void, Int, JSONObject>(){
     override fun doInBackground(vararg params: Void?): JSONObject? {
@@ -28,7 +29,7 @@ class checkUpdate(): AsyncTask<Void, Int, JSONObject>(){
             val inn = BufferedReader(InputStreamReader(iss))
             var line = inn.readLines()
             var page = String()
-            for (x in 0..line.size-1){
+            for (x in 0..line.size - 1) {
                 page += line[x]
                 Log.e("RECV DATA*", page)
             }
@@ -36,6 +37,9 @@ class checkUpdate(): AsyncTask<Void, Int, JSONObject>(){
             val jsonObject = JSONObject(page)
             Log.e(TAG, "2차")
             return jsonObject
+        } catch (e: UnknownHostException){
+            e.printStackTrace()
+            return null
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         } catch (e: IOException) {

@@ -62,14 +62,14 @@ public class settingActivity : AppCompatActivity()  {
         versiontext.setText("${getVersionInfo(this)}")
 
 
-        backupButton.setOnClickListener {
+        /**backupButton.setOnClickListener {
             if(!permissionManager.hasPermissions(this, permissionList)){
                 ActivityCompat.requestPermissions(this, permissionList, permissionALL)
             }
             else{
                 backupDB.exportDB(this)
             }
-        }
+        }**/
 
         reseTButton.setOnClickListener{
             val helper = DataBaseHelper(this)
@@ -85,12 +85,12 @@ public class settingActivity : AppCompatActivity()  {
 
         }
 
-        importButton.setOnClickListener{
-            Toast.makeText(this, "죄송합니다, 준비중인 기능입니다.", Toast.LENGTH_SHORT)
+       // importButton.setOnClickListener{
+            //Toast.makeText(this, "죄송합니다, 준비중인 기능입니다.", Toast.LENGTH_SHORT)
             //val fileSIntent = Intent(Intent.ACTION_GET_CONTENT)
             //fileSIntent.setType("*/*")
             //startActivityForResult(fileSIntent, 1)
-        }
+        //}
 
 
         var sendreport = findViewById<LinearLayout>(R.id.reportButton)

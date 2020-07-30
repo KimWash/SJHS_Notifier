@@ -58,31 +58,11 @@ public class IntroActivity : AppCompatActivity()  {
         return false
     }
 
-    fun checkConnectivity(){
+    fun checkConnectivity():Boolean{
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         val status = networkInfo != null && networkInfo.isConnected
-        if (status == false) {
-            val alert_confirm =
-                AlertDialog.Builder(this)
-            alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
-                .setPositiveButton(
-                    "확인"
-                ) { dialog, which ->
-                    // 'YES'
-                    android.os.Process.killProcess(android.os.Process.myPid())
-                }
-            val alert = alert_confirm.create()
-            alert.show()
-        }
-        else{
-            val hander = Handler()
-            hander.postDelayed({
-                startActivity(Intent(application, MainActivity::class.java))
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                this@IntroActivity.finish()
-            }, SPLASH_TIME.toLong())
-        }
+        return status
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -109,14 +89,9 @@ public class IntroActivity : AppCompatActivity()  {
 
 
     fun updateChecker():Int{
-        Log.e(TAG, "3차")
         val jsonObject:JSONObject = checkUpdate().execute().get()
         val version = jsonObject.getDouble("version")
         val changes = jsonObject.getString("changes")
-        //val version = 1.31
-        //val changes = "fsdff"
-        Log.e(TAG, "4차")
-        Log.e(TAG, "업데이트 있음 버전: $version, 변경점: $changes")
         val versionName = getVersionInfo(this)
 
         if (versionName.toDouble() < version){
@@ -134,7 +109,12 @@ public class IntroActivity : AppCompatActivity()  {
             return 1
         }
         else{
-            checkConnectivity()
+            val hander = Handler()
+            hander.postDelayed({
+                startActivity(Intent(application, MainActivity::class.java))
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                this@IntroActivity.finish()
+            }, SPLASH_TIME.toLong())
         }
         return 0
     }
@@ -192,38 +172,50 @@ public class IntroActivity : AppCompatActivity()  {
         registerReceiver(mCompleteReceiver, completeFilter)
     }
 
-    fun installApp() {
-
-    }
-
-
 
         @Override
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+            if (checkConnectivity() == false) {
+                val alert_confirm =
+                    AlertDialog.Builder(this)
+                alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
+                    .setPositiveButton(
+                        "확인"
+                    ) { dialog, which ->
+                        // 'YES'
+                        android.os.Process.killProcess(android.os.Process.myPid())
+                    }
+                val alert = alert_confirm.create()
+                alert.show()
+            }
+            else{
+                Log.e(TAG, "ㅎㅇ")
+                val intent = getIntent()
+                if (intent != null){
+                    val notiData = intent.getStringExtra("category")
+                }
+                if (isNightModeActive(this)) {
+                    setTheme(R.style.DarkTheme)
+                } else if (!isNightModeActive(this)) {
+                    setTheme(R.style.LightTheme)
+                }
+                if (!permissionManager.hasPermissions(this, permissionList)) {
+                    ActivityCompat.requestPermissions(this, permissionList, permissionALL)
+                } else {
+                    updateChecker()
+                }
+                setContentView(R.layout.activity_intro)
+                Stetho.initializeWithDefaults(this)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                if (isNightModeActive(this)) {
+                    imageView.setImageResource(R.drawable.splash_dark)
+                } else if (!isNightModeActive(this)) {
+                    imageView.setImageResource(R.drawable.splash)
+                }
+            }
 
-            val intent = getIntent()
-            if (intent != null){
-                val notiData = intent.getStringExtra("category")
-            }
-            if (isNightModeActive(this)) {
-                setTheme(R.style.DarkTheme)
-            } else if (!isNightModeActive(this)) {
-                setTheme(R.style.LightTheme)
-            }
-            if (!permissionManager.hasPermissions(this, permissionList)) {
-                ActivityCompat.requestPermissions(this, permissionList, permissionALL)
-            } else {
-                updateChecker()
-            }
-            setContentView(R.layout.activity_intro)
-            Stetho.initializeWithDefaults(this)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            if (isNightModeActive(this)) {
-                imageView.setImageResource(R.drawable.splash_dark)
-            } else if (!isNightModeActive(this)) {
-                imageView.setImageResource(R.drawable.splash)
-            }
+
         }
 
 

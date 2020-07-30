@@ -61,7 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginBottom="7.5dp">
+                android:layout_marginBottom="7.5dp"
+                android:background="@drawable/ripple_custom">
                 <TextView
                     android:id="@+id/mealName"
                     android:layout_width="wrap_content"
@@ -93,7 +94,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="7.5dp"
-                android:layout_marginBottom="7.5dp">
+                android:layout_marginBottom="7.5dp"
+                android:background="@drawable/ripple_custom">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,7 +148,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="7.5dp"
-                android:layout_marginBottom="7.5dp">
+                android:layout_marginBottom="7.5dp"
+                android:background="@drawable/ripple_custom">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -198,7 +201,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="7.5dp">
+                android:layout_marginTop="7.5dp"
+                android:background="@drawable/ripple_custom">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -258,7 +262,8 @@
                 android:id="@+id/setting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/ripple_custom">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
