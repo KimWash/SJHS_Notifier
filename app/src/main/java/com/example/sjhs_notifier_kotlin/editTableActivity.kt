@@ -289,6 +289,7 @@ class editTableActivity : AppCompatActivity()  {
                     }
                 }
                 Log.e(TAG, "와일문 통과")
+                Log.e(TAG, "insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
                 db!!.execSQL("insert into tb_tt(subject, teacher, day, sPeriod, ePeriod) values ($selectedSubject, $selectedTeacher, $selectedDay, $selectedsPeriod, $selectedePeriod)")
                 Toast.makeText(this, "과목이 추가되었습니다!", Toast.LENGTH_SHORT).show()
                 finish()

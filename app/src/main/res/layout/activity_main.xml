@@ -202,6 +202,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="7.5dp"
+                android:layout_marginBottom="7.5dp"
                 android:background="@drawable/ripple_custom">
 
                 <LinearLayout
@@ -239,6 +240,52 @@
                     </LinearLayout>
 
 
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="?android:attr/listDivider" />
+
+
+            <LinearLayout
+                android:id="@+id/h4payButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7.5dp"
+                android:orientation="horizontal"
+                android:background="@drawable/ripple_custom">
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_h4paylogo" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/h4pay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/apple_medium"
+                        android:text="H4Pay"
+                        android:textColor="?attr/titleColor"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/h4payContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="매점 온라인 결제 및 예약 서비스"
+                        android:textColor="?attr/textColor"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 

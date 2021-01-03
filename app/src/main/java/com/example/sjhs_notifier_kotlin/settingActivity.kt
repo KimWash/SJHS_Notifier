@@ -8,11 +8,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_setting.*
+import java.io.File
 
 
 val TAG = "DEBUG"
@@ -28,7 +30,9 @@ public class settingActivity : AppCompatActivity()  {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == RESULT_OK){
             val fileUri = data?.data
-            getRealPathFromURI(fileUri!!)
+            if (fileUri != null) {
+                Log.e(TAG, getRealPathFromURI(fileUri))
+            }
         }
 
     }
@@ -62,14 +66,14 @@ public class settingActivity : AppCompatActivity()  {
         versiontext.setText("${getVersionInfo(this)}")
 
 
-        /**backupButton.setOnClickListener {
+        backupButton.setOnClickListener {
             if(!permissionManager.hasPermissions(this, permissionList)){
                 ActivityCompat.requestPermissions(this, permissionList, permissionALL)
             }
             else{
                 backupDB.exportDB(this)
             }
-        }**/
+        }
 
         reseTButton.setOnClickListener{
             val helper = DataBaseHelper(this)
@@ -85,12 +89,12 @@ public class settingActivity : AppCompatActivity()  {
 
         }
 
-       // importButton.setOnClickListener{
-            //Toast.makeText(this, "죄송합니다, 준비중인 기능입니다.", Toast.LENGTH_SHORT)
-            //val fileSIntent = Intent(Intent.ACTION_GET_CONTENT)
-            //fileSIntent.setType("*/*")
-            //startActivityForResult(fileSIntent, 1)
-        //}
+       importButton.setOnClickListener{
+            Toast.makeText(this, "죄송합니다, 준비중인 기능입니다.", Toast.LENGTH_SHORT)
+            val fileSIntent = Intent(Intent.ACTION_GET_CONTENT)
+            fileSIntent.setType("*/*")
+            startActivityForResult(fileSIntent, 1)
+        }
 
 
         var sendreport = findViewById<LinearLayout>(R.id.reportButton)

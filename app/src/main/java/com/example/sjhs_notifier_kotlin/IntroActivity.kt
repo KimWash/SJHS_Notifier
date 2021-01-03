@@ -22,6 +22,7 @@ import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.activity_intro.*
 import org.json.JSONObject
 import java.io.File
+import java.lang.reflect.Method
 
 
 val permissionALL = 1
@@ -31,7 +32,25 @@ val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest
 public class IntroActivity : AppCompatActivity()  {
 
 
-
+    fun dispDialog(msg:String, okEvent: () -> Unit, title:String, icon:Int?){
+        val alert_confirm = AlertDialog.Builder(this)
+        alert_confirm.setMessage(msg)
+        alert_confirm.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
+           okEvent()
+        })
+        if (icon != null){
+            alert_confirm
+                .setTitle(title)
+                .create()
+                .setIcon(icon)
+        }
+        else{
+            alert_confirm
+                .setTitle(title)
+                .create()
+        }
+        alert_confirm.show()
+    }
 
     private var mDownloadQueueId:Long? = null
     private var mFileName:String? = null
@@ -89,23 +108,28 @@ public class IntroActivity : AppCompatActivity()  {
 
 
     fun updateChecker():Int{
-        val jsonObject:JSONObject = checkUpdate().execute().get()
+        var jsonObject:JSONObject = JSONObject()
+        try {
+            jsonObject = checkUpdate().execute().get()
+        }catch(e: Exception){
+            Log.e(TAG, "updateServer dead..")
+            dispDialog("업데이트 서버와 연결할 수 없습니다. 오프라인 모드로 실행합니다.", {}, "오류", null)
+            val hander = Handler()
+            hander.postDelayed({
+                startActivity(Intent(application, MainActivity::class.java))
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                this@IntroActivity.finish()
+            }, SPLASH_TIME.toLong())
+            return 0
+        }
         val version = jsonObject.getDouble("version")
         val changes = jsonObject.getString("changes")
         val versionName = getVersionInfo(this)
 
         if (versionName.toDouble() < version){
-            var alert_confirm = AlertDialog.Builder(this)
-            alert_confirm.setMessage("$version 업데이트가 있어요!\n변경점: $changes")
-            alert_confirm.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
-                downloadApp(version)
-            })
-            alert_confirm
-                .setTitle("업데이트")
-                .create()
-                .setIcon(R.drawable.ic_build_black_24dp)
-            alert_confirm.show()
-            //TODO: 업데이트 구문
+            dispDialog("$version 업데이트가 있어요!\n변경점: $changes",
+                { downloadApp(version) }, "업데이트", R.drawable.ic_build_black_24dp )
+
             return 1
         }
         else{
@@ -126,7 +150,7 @@ public class IntroActivity : AppCompatActivity()  {
         val url = Uri.parse("https://yoon-lab.xyz/sjhsnotifier/files/apk/sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk")
         val request:DownloadManager.Request = DownloadManager.Request(url)
         request.setTitle("서전고 앱 업데이트")
-        request.setDescription("다운로드중이에요...")
+        request.setDescription("다운로드 중입니다...")
         request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "sjhs_notifier_" + versionStr[0] + "_" + versionStr[1] + ".apk");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI and DownloadManager.Request.NETWORK_MOBILE)
@@ -176,24 +200,25 @@ public class IntroActivity : AppCompatActivity()  {
         @Override
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
+
+
+
             if (checkConnectivity() == false) {
-                val alert_confirm =
-                    AlertDialog.Builder(this)
-                alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
-                    .setPositiveButton(
-                        "확인"
-                    ) { dialog, which ->
-                        // 'YES'
-                        android.os.Process.killProcess(android.os.Process.myPid())
-                    }
-                val alert = alert_confirm.create()
-                alert.show()
+                dispDialog("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.",
+                    { android.os.Process.killProcess(android.os.Process.myPid()) }, "", null )
+
             }
             else{
-                Log.e(TAG, "ㅎㅇ")
                 val intent = getIntent()
                 if (intent != null){
-                    val notiData = intent.getStringExtra("category")
+                    val category = intent.getStringExtra("category")
+                    if (category == "announce"){
+                        val message = intent.getStringExtra("message")
+
+                        dispDialog(message,
+                            {}, "공지사항", R.drawable.ic_build_black_24dp )
+
+                    }
                 }
                 if (isNightModeActive(this)) {
                     setTheme(R.style.DarkTheme)

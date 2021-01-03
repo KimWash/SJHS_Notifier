@@ -21,7 +21,7 @@ class checkUpdate(): AsyncTask<Void, Int, JSONObject>(){
             )
             val conn = url.openConnection() as HttpURLConnection
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
-            conn.requestMethod = "POST"
+            conn.requestMethod = "GET"
             conn.doInput = true
             conn.connect()
             /* 서버 -> 안드로이드 파라메터값 전달 */
@@ -29,8 +29,8 @@ class checkUpdate(): AsyncTask<Void, Int, JSONObject>(){
             val inn = BufferedReader(InputStreamReader(iss))
             var line = inn.readLines()
             var page = String()
-            for (x in 0..line.size - 1) {
-                page += line[x]
+            for (element in line) {
+                page += element
                 Log.e("RECV DATA*", page)
             }
             Log.e(TAG, "1차")

@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (checkConnectivity() == false){
+        if (!checkConnectivity()){
             val alert_confirm =
                 AlertDialog.Builder(this)
             alert_confirm.setMessage("인터넷에 연결되어있지 않습니다. 확인 후 다시 이용 바랍니다.").setCancelable(false)
@@ -177,8 +177,6 @@ class MainActivity : AppCompatActivity() {
                 }
             val alert = alert_confirm.create()
             alert.show()
-            meal.setText("인터넷에 연결되어 있지 않습니다.")
-            schedules.setText("인터넷에 연결되어 있지 않습니다.")
         }
         else{
             getInformations(getTime(0), getTime(1), getTime(2), getTime(3))
@@ -218,6 +216,10 @@ class MainActivity : AppCompatActivity() {
         var settingButton = findViewById<LinearLayout>(R.id.setting)
         settingButton.setOnClickListener { val settingIntent = Intent(this@MainActivity, settingActivity::class.java); startActivity(settingIntent) }
 
-        selfTestButton.setOnClickListener{val testIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://eduro.cbe.go.kr/hcheck/index.jsp")); startActivity(testIntent)}
+        var h4payButton = findViewById<LinearLayout>(R.id.h4payButton)
+        h4payButton.setOnClickListener { val h4payIntent = Intent(this@MainActivity, h4payActivity::class.java); startActivity(h4payIntent) }
+
+        var selfCheckLink = resources.getString(R.string.selfCheckLink)
+        selfTestButton.setOnClickListener{val testIntent = Intent(Intent.ACTION_VIEW, Uri.parse(selfCheckLink)); startActivity(testIntent)}
     }
 }

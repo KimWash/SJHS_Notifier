@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/LightTheme"
         android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         >
 
         <service
@@ -28,7 +29,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.sjhs_notifier_kotlin.fileprovider"
+            android:authorities="com.example.sjhs_notifier_kotlin"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -64,6 +65,8 @@
             android:name=".settingActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+
+        <activity android:name=".h4payActivity"></activity>
 
 
     </application>
