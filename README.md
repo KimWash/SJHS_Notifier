@@ -1,9 +1,20 @@
-# SJHS_Notifier
-서전고등학교 알리미 어플리케이션입니다.
+# 서전고 알리미
 
-이 어플리케이션은 agemor님의 neis-api 파서를 기반으로 여러 기능을 추가하여 제작하고 있습니다.
+서전인의 불편했던 학교 생활, 확 바꿔주는 앱
 
-Github - https://github.com/agemor/neis-api
+Play Store: https://play.google.com/store/apps/details?id=com.kimwash.sjhs_notifier_kotlin
 
-또한, 이 어플리케이션은 아직 개발 중에 있으며 제작자가 학생인 관계로 개발이 늦어집니다.
-이 어플리케이션은 모든 학교를 위한 것이 아닌 충청북도에 위치한 서전고등학교만을 위해 개발 된 것임을 알려드립니다.
+<a href="https://www.youtube.com/watch?v=v86NYv8-3BQ"><img src="https://i.imgur.com/mIxuRkf.png"></a>
+
+# 개발환경
+
+- Kotlin 1.3.50
+- Gradle 4.1.3
+
+# 오픈소스
+
+neis-api(agemor) - https://github.com/agemor/neis-api
+
+zxing-android-embedded(journeyapps) - https://github.com/journeyapps/zxing-android-embedded
+
+Balloon(skydoves) - https://github.com/skydoves/Balloon
