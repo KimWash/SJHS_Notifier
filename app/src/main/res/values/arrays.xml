@@ -5,28 +5,43 @@
         <item>노작</item>
         <item>독립운동사</item>
         <item>자율연구</item>
+        <item>심화연구</item>
         <item>문학</item>
         <item>독서</item>
+        <item>화법과 작문</item>
         <item>수학I</item>
         <item>수학II</item>
+        <item>미적분</item>
         <item>확률과통계</item>
+        <item>실용수학</item>
         <item>영어I</item>
         <item>영어II</item>
+        <item>영어독해</item>
         <item>영미문학</item>
-        <item>물리학I</item>
-        <item>화학I</item>
-        <item>생명과학I</item>
-        <item>지구과학I</item>
+        <item>물리학</item>
+        <item>화학</item>
+        <item>생명과학</item>
+        <item>생명공학</item>
+        <item>지구과학</item>
         <item>동아시아사</item>
+        <item>세계사</item>
         <item>경제</item>
         <item>세계지리</item>
+        <item>한국지리</item>
         <item>정치와법</item>
         <item>윤리와사상</item>
+        <item>생활과윤리</item>
+        <item>사회문화</item>
         <item>스포츠</item>
-        <item>음악연주</item>
-        <item>미술창작</item>
+        <item>운동과건강</item>
+        <item>음악</item>
+        <item>미술</item>
         <item>기술가정</item>
         <item>정보</item>
+        <item>공학일반</item>
+        <item>실용경제</item>
+        <item>보건</item>
+        <item>교육학</item>
         <item>독일어</item>
         <item>일본어</item>
         <item>러시아어</item>
@@ -44,7 +59,10 @@
     </string-array>
     <string-array name="teacher">
         <item>선생님을 선택해주세요.</item>
+        <item>강여울</item>
+        <item>권영학</item>
         <item>권현주</item>
+        <item>고훈탁</item>
         <item>김관림</item>
         <item>김근영</item>
         <item>김민주</item>
@@ -55,7 +73,10 @@
         <item>김정미</item>
         <item>김정순</item>
         <item>김정훈</item>
+        <item>김종보</item>
         <item>김지선</item>
+        <item>노현경</item>
+        <item>맹계현</item>
         <item>박미순</item>
         <item>박미정</item>
         <item>박민진</item>
@@ -67,20 +88,21 @@
         <item>오영미</item>
         <item>윤덕영</item>
         <item>유예현</item>
-        <item>윤종원</item>
-        <item>이도종</item>
+        <item>이경준</item>
+        <item>이관희</item>
         <item>이성철</item>
         <item>이영화</item>
         <item>이유숙</item>
         <item>이은하수</item>
         <item>이진</item>
+        <item>장보영</item>
         <item>장소연</item>
+        <item>정우옥</item>
         <item>최용익</item>
         <item>최원희</item>
         <item>최지원</item>
         <item>최혜정</item>
-        <item>한상훈</item>
-        <item>홍희순</item>
+        <item>한효진</item>
         <item>황영연</item>
     </string-array>
     <string-array name="group">

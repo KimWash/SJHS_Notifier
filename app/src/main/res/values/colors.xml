@@ -6,4 +6,6 @@
     <color name="colorBlack">#000000</color>
     <color name="dividerColor">#e6e6e6</color>
     <color name="colorRed">#ff0000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="ballonColor">#385AFF</color>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sjhs_notifier_kotlin">
+    package="com.kimwash.sjhs_notifier_kotlin">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -19,7 +19,7 @@
         >
 
         <service
-            android:name=".notiClass"
+            android:name="com.kimwash.sjhs_notifier_kotlin.notiClass"
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -29,7 +29,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.sjhs_notifier_kotlin"
+            android:authorities="com.kimwash.sjhs_notifier_kotlin"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -38,14 +38,14 @@
         </provider>
 
         <activity
-            android:name=".MainActivity">
+            android:name="com.kimwash.sjhs_notifier_kotlin.MainActivity">
         </activity>
 
         <activity
-            android:name=".mealActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:name="com.kimwash.sjhs_notifier_kotlin.mealActivity"
+            android:parentActivityName="com.kimwash.sjhs_notifier_kotlin.MainActivity"/>
         <activity
-            android:name=".IntroActivity"
+            android:name="com.kimwash.sjhs_notifier_kotlin.IntroActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -54,19 +54,22 @@
 
         </activity>
 
-        <activity android:name=".timeTableActivity" android:parentActivityName=".MainActivity">
+
+        <activity
+            android:name=".idCardActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name="com.kimwash.sjhs_notifier_kotlin.timeTableActivity" android:parentActivityName="com.kimwash.sjhs_notifier_kotlin.MainActivity">
 
         </activity>
-        <activity android:name=".editTableActivity" android:parentActivityName=".timeTableActivity">
+        <activity android:name="com.kimwash.sjhs_notifier_kotlin.editTableActivity" android:parentActivityName="com.kimwash.sjhs_notifier_kotlin.timeTableActivity">
 
         </activity>
 
         <activity
-            android:name=".settingActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.kimwash.sjhs_notifier_kotlin.settingActivity"
+            android:parentActivityName="com.kimwash.sjhs_notifier_kotlin.MainActivity">
         </activity>
 
-        <activity android:name=".h4payActivity"></activity>
 
 
     </application>

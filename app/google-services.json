@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "550468935660",
-    "project_id": "sjhsnotifierapp",
-    "storage_bucket": "sjhsnotifierapp.appspot.com"
+    "project_number": "420823810034",
+    "firebase_url": "https://sjhsnotifier.firebaseio.com",
+    "project_id": "sjhsnotifier",
+    "storage_bucket": "sjhsnotifier.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:550468935660:android:7e68e86fe74eedd52b6ac9",
+        "mobilesdk_app_id": "1:420823810034:android:af6fa18d0fc4805245756b",
         "android_client_info": {
-          "package_name": "com.example.sjhs_notifier_kotlin"
+          "package_name": "com.kimwash.sjhs_notifier_kotlin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "550468935660-uohnbqq6k4ef9khihe4d8l1r8vpkq93g.apps.googleusercontent.com",
+          "client_id": "420823810034-qokludp3obc30cshpi7itp3li09ngp8o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBjE-zCrDX0gHgqDtKH3bUbed2swehQQBk"
+          "current_key": "AIzaSyDhcUFAHCMvgfxXBdFphy6vy7tiEDCnRoU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "550468935660-uohnbqq6k4ef9khihe4d8l1r8vpkq93g.apps.googleusercontent.com",
+              "client_id": "420823810034-qokludp3obc30cshpi7itp3li09ngp8o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -73,4 +73,13 @@
     <style name="bNav" parent="Theme.AppCompat">
         <item name="android:fontFamily">@font/apple_regular</item>
     </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="colorPrimary">?attr/bgColor</item>
+        <item name="colorPrimaryDark">?attr/bgColor</item>
+        <item name="colorAccent">?attr/bgColor</item>
+        <item name="android:textColor">?attr/textColor</item>
+        <item name="backgroundColor">?attr/bgColor</item>
+        <item name="background">?attr/bgColor</item>
+    </style>
 </resources>

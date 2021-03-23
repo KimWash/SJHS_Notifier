@@ -7,16 +7,21 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.example.sjhs_notifier_kotlin"
+        applicationId "com.kimwash.sjhs_notifier_kotlin"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 16
-        versionName "1.383"
+        versionCode 20
+        versionName "1.39"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -46,26 +51,36 @@ android {
         exclude 'META-INF/LGPL2.1'
 
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.browser:browser:1.3.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'androidx.browser:browser:1.3.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation "kr.go.neis.api:neis-api:4.0.1"
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.play:core:1.10.0'
     implementation 'com.android.support:support-annotations:29'
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
     implementation 'com.android.support:design:29.0.0'
     implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
     implementation 'com.github.nkzawa:socket.io-client:0.3.0'
+    implementation "com.github.skydoves:balloon:1.3.3"
     implementation('io.socket:socket.io-client:1.0.0') {
         exclude group: 'org.json', module: 'json'
     }
