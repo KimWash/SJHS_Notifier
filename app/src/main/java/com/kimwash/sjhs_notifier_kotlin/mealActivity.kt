@@ -35,6 +35,7 @@ class mealActivity : AppCompatActivity() {
     val inf = "Information"
     var school = School(School.Type.HIGH, School.Region.CHUNGBUK, "M100002171")
     private lateinit var bMenu:BottomNavigationView
+    private lateinit var calendarView: CalendarView
 
     fun getTime(type:Int): Int {
         val now = System.currentTimeMillis()
@@ -66,14 +67,13 @@ class mealActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bMenu = findViewById(R.id.bMenu)
-
         if (MainActivity.isNightModeActive(this) == true) {
             setTheme(R.style.DarkTheme)
         } else if (MainActivity.isNightModeActive(this) == false) {
             setTheme(R.style.LightTheme)
         }
         setContentView(R.layout.activity_meal)
+        bMenu = findViewById(R.id.bMenu)
         bMenu.itemIconTintList = null
         setSupportActionBar(mealToolbar)
         getSupportActionBar()?.title = "식단표"
@@ -96,14 +96,13 @@ class mealActivity : AppCompatActivity() {
 
             Thread(Runnable {
                 runOnUiThread {
-                    val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bMenu)
-                    bottomNavigationView?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+                    bMenu.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
                 }
             }).start()
             Thread(Runnable {
                 runOnUiThread {
-                    val calendarViewfun = findViewById<CalendarView>(R.id.calendarView)
-                    calendarViewfun?.setOnDateChangeListener { view, year, month, dayOfMonth -> Log.e(TAG, "$month, $dayOfMonth"); getAvailableMeals(year, month, dayOfMonth)}
+                    calendarView = findViewById(R.id.calendarView)
+                    calendarView.setOnDateChangeListener { view, year, month, dayOfMonth -> Log.e(TAG, "$month, $dayOfMonth"); getAvailableMeals(year, month, dayOfMonth)}
                 }
             }).start()
         }
@@ -182,7 +181,7 @@ class mealActivity : AppCompatActivity() {
                     R.id.action_two -> lunch.setText(meals[1])
                     R.id.action_three -> lunch.setText(meals[2])
                 }
-                if (bMenu.getMenu().findItem(R.id.action_one).isVisible == false && bMenu.getMenu().findItem(R.id.action_two).isVisible == false && bMenu.getMenu().findItem(R.id.action_three).isVisible == false){
+                if (!bMenu.getMenu().findItem(R.id.action_one).isVisible && !bMenu.getMenu().findItem(R.id.action_two).isVisible && !bMenu.getMenu().findItem(R.id.action_three).isVisible){
                     lunch.setText("이 날에는 급식 정보가 없는 것 같네요.")
                     bMenu.isVisible = false
                 }
